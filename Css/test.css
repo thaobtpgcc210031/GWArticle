@@ -1,0 +1,14 @@
+.container-content-item{
+    margin: 20px;
+}
+.content-item{
+    height: auto;
+}
+img{
+    padding: 10px;
+}
+.shirt-link{
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}

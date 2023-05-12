@@ -1,0 +1,11 @@
+div.owl-carousel .owl-nav{
+    visibility: hidden;
+}
+.slide-item{
+    width: 100%;
+}
+.sl_img{
+    width: 100%;
+    height: 550px;
+
+}

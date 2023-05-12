@@ -1,0 +1,25 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Asap&family=Notable&family=Open+Sans:wght@300&family=Sora:wght@300&display=swap');
+
+.container-content-item{
+    margin: 20px;
+}
+.content-item{
+    height: auto;
+}
+.content-item:hover{
+    border: 3px solid rgb(160, 159, 159);
+    border-radius: 20px;
+}
+img{
+    padding: 10px;
+    border-radius: 20px;
+}
+.shirt-link{
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}
+.shirt-price{
+    padding-bottom: 20px;
+}
