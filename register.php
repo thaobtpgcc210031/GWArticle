@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Register | Page</title>
 </head>
 <body>
   
@@ -18,12 +18,12 @@ if(isset($_POST['btnRegister'])){
 	$pass2 = $_POST['txtPass2'];
 	$fullname = $_POST['txtName'];
 	$email = $_POST['txtEmail'];
-	$phone = $_POST['txtPhone'];
+	$tele = $_POST['txtPhone'];
 	$address = $_POST['txtAddress'];	
 	$err = "";
 
 	if($us==""||$pass1=="" ||$pass2==""||$fullname==""
-	||$email==""||$address==""||$phone=""){
+	||$email==""||$address==""||$tel=""){
 		$err .="<li>Enter information fully, please</li>";
 	}
 	
@@ -45,8 +45,8 @@ if(isset($_POST['btnRegister'])){
         $sq = "SELECT * FROM user WHERE Username='$us' OR email='$email'";
         $res = mysqli_query($conn,$sq);
         if(mysqli_num_rows($res)==0){
-            mysqli_query($conn, "INSERT INTO user (Username, Password, email, fullName, address ,telephone)
-                                VALUES ('$us','$pass' ,'$email','$fullname','$address','$phone')") or die(mysqli_error($conn));
+            mysqli_query($conn, "INSERT INTO user (Username, Password, email, fullName, address ,telephone,admin)
+                                VALUES ('$us','$pass' ,'$email','$fullname','$address','$tele','0')") or die(mysqli_error($conn));
                                 echo "You have registered successfully";
         }else{
 		      echo "Username or email already exists";
@@ -71,7 +71,7 @@ if(isset($_POST['btnRegister'])){
           <input type="text" name="txtName" id="txtName" placeholder="full name"/>
           <input type="text" name="txtEmail" id="txtEmail" placeholder="email"/>
           <input type="text" name="txtPhone" id="txtPhone" placeholder="phone number"/>
-          <input type="text" name="txtAddress" id="txtAddress" placeholder="Address"/>
+          <input type="text" name="txtAddress" id="txtAddress" placeholder="address"/>
           <button type="submit" name="btnRegister" id="btnRegister" value="Register">REGISTER</button>
           <p class="message">Already have an account! <a href="login.php">LOGIN</a></p>
         </form>

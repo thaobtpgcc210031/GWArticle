@@ -65,7 +65,7 @@
 			$des = $_POST["txtDes"];
 			$err = "";
 			if($name==""){
-				$err.="<li>Damn, Enter Catefory name now?</li>";
+				$err.="<li>Enter category name</li>";
 			}
 			if($err!=""){
 				echo "<ul>$err</ul>";

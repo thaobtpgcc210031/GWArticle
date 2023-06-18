@@ -1,0 +1,19 @@
+.cate-nav{
+    background-color: black; 
+    border: 1px solid black;
+    Width:150px;
+    height: 50px;
+    padding-top: 10px;
+    font-weight: bold;
+    color: white;
+    font-size: large;
+    cursor: pointer;
+    text-decoration: none;
+    
+}
+.cate-nav:hover{
+    background-color: white; 
+    color: black;
+    cursor: pointer;
+    
+}
