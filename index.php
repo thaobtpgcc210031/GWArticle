@@ -63,7 +63,7 @@
               MANAGEMENT
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="?page=product"style="font-weight: bold;">Shirt</a></li>
+                <li><a class="dropdown-item" href="?page=product"style="font-weight: bold;">Product</a></li>
                 <li><a class="dropdown-item" href="?page=category"style="font-weight: bold;">Category</a></li>
               </ul>
             </li>

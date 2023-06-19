@@ -79,7 +79,7 @@
   <form action="" method="POST" enctype="multipart/form-data">
   <div class="row">
     <div class="col-25">
-      <label for="">Shirt ID</label>
+      <label for="">Product ID</label>
     </div>
     <div class="col-75">
       <input type="text" id="txtID" name="txtID" placeholder="ID of shirt...">
