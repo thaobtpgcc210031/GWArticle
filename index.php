@@ -11,7 +11,7 @@
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <title>N-shirt shop - Welcome</title>
+    <title>ATN store - Welcome</title>
   </head>
   <style>
     .grid-container{
@@ -91,10 +91,8 @@
               CATEGORY
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="?page=tshirt"style="font-weight: bold;">T-Shirt</a></li>
-                <li><a class="dropdown-item" href="?page=polo"style="font-weight: bold;">Polo</a></li>
-                <li><a class="dropdown-item" href="?page=sweater"style="font-weight: bold;">Sweater</a></li>
-                <li><a class="dropdown-item" href="?page=henley"style="font-weight: bold;">Henleys</a></li>
+              <li><a class="dropdown-item" href="?page=tshirt"style="font-weight: bold;">Robot</a></li>
+                <li><a class="dropdown-item" href="?page=polo"style="font-weight: bold;">Lego</a></li>
                 <li><a class="dropdown-item" href="?page=show"style="font-weight: bold;">All..</a></li>
               </ul>
             </li>

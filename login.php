@@ -2,7 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./Css/style.css">
-<title> N-Shirt | Login</title>
+<title> ATN | Login</title>
 </head>
 <?php
 if(isset($_POST['btnLogin'])){
