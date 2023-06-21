@@ -144,7 +144,7 @@
                       while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
                   ?>
                 <div class="grid-container">
-                  <div class="cart-item item1"><img src="./img/<?php echo $row['cart_Img']; ?>" alt="" style="border-radius: 0;" width="100%" height="100%"></div>
+                  <div class="cart-item item1"><img src="./Img/<?php echo $row['cart_Img']; ?>" alt="" style="border-radius: 0;" width="100%" height="100%"></div>
                   <div class="cart-item item2"><h3><?php echo $row['pro_Name']; ?></h3>Quantity: <?php echo $row['cart_Qty']; ?><h3></div>
                   <div class="cart-item item3">Total: <?php echo $row['total_Price']; ?>.00$</div>
                 </div>

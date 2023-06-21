@@ -4,10 +4,8 @@
     <div class="container-fluid">
         <div class="row justify-content-center" style="text-align: center; background-color:black">
             <a href="?page=show" class="col-2 cate-nav">All</a>
-            <a href="?page=tshirt" class="col-2 cate-nav">T-Shirt</a>
-            <a href="?page=polo" class="col-2 cate-nav">Polo</a>
-            <a href="?page=sweater" class="col-2 cate-nav">Sweater</a>
-            <a href="?page=henley" class="col-2 cate-nav">Henleys</a>
+            <a href="?page=tshirt" class="col-2 cate-nav">Robot</a>
+            <a href="?page=polo" class="col-2 cate-nav">Lego</a>
         </div>
          
     <div class="row"style="margin-top: 25px;">
