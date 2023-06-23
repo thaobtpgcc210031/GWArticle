@@ -1,13 +1,10 @@
-<link rel="stylesheet" href="./Css/product.css">
-
-    
+<link rel="stylesheet" href="./Css/product.css">  
     <div class="container-fluid">
         <div class="row justify-content-center" style="text-align: center; background-color:black">
             <a href="?page=show" class="col-2 cate-nav">All</a>
             <a href="?page=tshirt" class="col-2 cate-nav">Robot</a>
             <a href="?page=polo" class="col-2 cate-nav">Lego</a>
-        </div>
-         
+        </div>         
     <div class="row"style="margin-top: 25px;">
      <H1>Searching for: "<?php echo $searching?>"</H1><hr>
     <?php
@@ -16,7 +13,6 @@
             $searching = $_POST['searching'];
           }  
         $result = mysqli_query($conn, "SELECT * FROM `shirt` WHERE `ShiName` LIKE '%$searching%'" );
-
         if (!$result) {
             die('Invalid query: ' . mysqli_error($conn));
             }					            

@@ -91,7 +91,7 @@
         <div class="row"> 
         <?php
 
-		  	$result = mysqli_query($conn, "SELECT * FROM shirt where Cat_ID = 'C05'" );
+		  	$result = mysqli_query($conn, "SELECT * FROM shirt where Cat_ID = 'C02'" );
 			
 			if (!$result) {
                 die('Invalid query: ' . mysqli_error($conn));

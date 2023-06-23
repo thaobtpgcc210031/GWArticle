@@ -10,8 +10,6 @@ if(isset($_GET["id"])){
     $image = $row['ShiImg'];
     //echo $_SESSION['us'];
 }
-
-
     if(isset($_POST['btnAddCart'])){
         $qty=$_POST['txtAmount'];
         $usrname = $_SESSION['us'];
@@ -22,21 +20,14 @@ if(isset($_GET["id"])){
             $sz = $_POST['size'];
             mysqli_query($conn, "INSERT INTO theCart (pro_Name, size, cart_Qty, date, userName ,total_Price, cart_Img)
                                 VALUES ('$name','$sz' ,'$qty','".date('Y-m-d H:i:s')."','$usrname','$total','$image')") or die(mysqli_error($conn));
-            echo '<meta http-equiv="refresh" content="0;URL=index.php?page=home"/>';
-                
+            echo '<meta http-equiv="refresh" content="0;URL=index.php?page=home"/>';                
             }else{
                 echo'<li>enter quantity</li>';
-            }
-            
+            }            
         }else{
-           echo '<li>choose size</li>'; 
-            
-        }
-
-        
+           echo '<li>choose size</li>';             
+        }        
     }
-
-
 ?>
 <div class="container-fluid">
     <form action="" method="POST">
