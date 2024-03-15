@@ -51,7 +51,7 @@
 
 
 <div class="container-content-item">
-        <h2 style="text-align: center;padding-top:50px; padding-bottom: 20px;">// Best Sellers //</h2>
+        <h2 style="text-align: center;padding-top:50px; padding-bottom: 20px;">// Popular Article //</h2>
         <div class="container-fluid">
         <div class="row"> 
         <?php
@@ -81,12 +81,12 @@
           }
           ?>
           <div class="col-12 more-btn" style="text-align: center; padding-top:15px">
-            <a href="?page=show" style="text-decoration: none; color: black;" class="more-link">More product &#10148;</a>
+            <a href="?page=show" style="text-decoration: none; color: black;" class="more-link">More Article &#10148;</a>
           </div>
         </div>
       </div>
     </div>
-    <h2 style="text-align: center;padding-top:50px; padding-bottom: 20px;">// LEGO //</h2>
+    <h2 style="text-align: center;padding-top:50px; padding-bottom: 20px;">// Most View //</h2>
     <div class="container-fluid">
         <div class="row"> 
         <?php
@@ -116,12 +116,12 @@
           ?>
         </div>
         <div class="col-12 more-btn" style="text-align: center; padding-top:15px">
-            <a href="?page=polo" style="text-decoration: none; color: black;" class="more-link">More Lego &#10148;</a>
+            <a href="?page=polo" style="text-decoration: none; color: black;" class="more-link">More Article &#10148;</a>
           </div>
       </div>
     </div>
 
-    <h2 style="text-align: center;padding-top:50px;  padding-bottom: 20px;">// Robot //</h2>
+    <h2 style="text-align: center;padding-top:50px;  padding-bottom: 20px;">// New Article //</h2>
     <div class="container-fluid">
         <div class="row"> 
         <?php
@@ -150,14 +150,14 @@
           }
           ?>
           <div class="col-12 more-btn" style="text-align: center; padding-top:15px">
-            <a href="?page=tshirt" style="text-decoration: none; color: black;" class="more-link">More Robot &#10148;</a>
+            <a href="?page=tshirt" style="text-decoration: none; color: black;" class="more-link">More Article &#10148;</a>
           </div>
         </div>
       </div>
       <div class="container-fluid" style="padding-top: 50px;">
           <hr>
           <div style="position: absolute;" class="bttm-content">
-            <h1>"N-SHIRT IS THE BEST RETAIL ONLINE SHOP"</h1>
+            <h1>"----------------------"</h1>
             <p style="font-size: larger;">contact us with</p>
             <div class="social">
               <a href="https://www.facebook.com/" class="fa fa-facebook"></a>

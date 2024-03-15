@@ -11,7 +11,7 @@
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <title>ATN store - Welcome</title>
+    <title>GW Magazine - Welcome</title>
   </head>
   <style>
     .grid-container{
@@ -46,7 +46,7 @@
   <body class="p-3 m-0 border-0">
     <nav class="navbar navbar-expand-lg" >
       <div class="container-fluid">
-        <a class="navbarbrand" href="#" style="color: black;">ATN</a>
+        <a class="navbarbrand" href="#" style="color: black;">GW</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -63,8 +63,8 @@
               MANAGEMENT
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="?page=product"style="font-weight: bold;">Product</a></li>
-                <li><a class="dropdown-item" href="?page=category"style="font-weight: bold;">Category</a></li>
+                <li><a class="dropdown-item" href="?page=article"style="font-weight: bold;">Article</a></li>
+                <li><a class="dropdown-item" href="?page=feedback"style="font-weight: bold;">Feedback</a></li>
               </ul>
             </li>
             <?php
@@ -73,11 +73,11 @@
             ?>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"style="font-weight: bold;">
-              CATEGORY
+              ARTICLE
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="?page=tshirt"style="font-weight: bold;">Robot</a></li>
-                <li><a class="dropdown-item" href="?page=polo"style="font-weight: bold;">Lego</a></li>
+                <li><a class="dropdown-item" href="?page=tshirt"style="font-weight: bold;">Shool</a></li>
+                <li><a class="dropdown-item" href="?page=polo"style="font-weight: bold;">Social</a></li>
                 <li><a class="dropdown-item" href="?page=show"style="font-weight: bold;">All..</a></li>
 
               </ul>
@@ -88,11 +88,11 @@
             ?>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"style="font-weight: bold;">
-              CATEGORY
+              FEEDBACK
               </a>
               <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="?page=tshirt"style="font-weight: bold;">Robot</a></li>
-                <li><a class="dropdown-item" href="?page=polo"style="font-weight: bold;">Lego</a></li>
+              <li><a class="dropdown-item" href="?page=tshirt"style="font-weight: bold;">School</a></li>
+                <li><a class="dropdown-item" href="?page=polo"style="font-weight: bold;">Social</a></li>
                 <li><a class="dropdown-item" href="?page=show"style="font-weight: bold;">All..</a></li>
               </ul>
             </li>
@@ -132,27 +132,7 @@
 
             
           </form>
-          <li class="nav-item" style="font-weight:bolder;">
-            <a href="?page=cart">
-              <div class="dropdownn">          
-              <i class="fa-sharp fa-solid fa-cart-shopping fa-lg cart-hver" style="font-size: 28px;"></i>
-                <div class="dropdown-content" style="width: 400px;">
-                <?php
-                      $result = mysqli_query($conn, "SELECT * FROM theCart where userName = '" .$_SESSION["us"]. "'");
-                      while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                  ?>
-                <div class="grid-container">
-                  <div class="cart-item item1"><img src="./Img/<?php echo $row['cart_Img']; ?>" alt="" style="border-radius: 0;" width="100%" height="100%"></div>
-                  <div class="cart-item item2"><h3><?php echo $row['pro_Name']; ?></h3>Quantity: <?php echo $row['cart_Qty']; ?><h3></div>
-                  <div class="cart-item item3">Total: <?php echo $row['total_Price']; ?>.00$</div>
-                </div>
-                <?php
-                  }
-                ?>
-                </div>            
-              </div>
-            </a>
-            </li>
+
           
             <li class="nav-item" style="margin-right: 30px; font-weight:bolder;">
               <a class="nav-link active" href="?page=account" style="">Hi, <?php echo $_SESSION['us']?></a>
@@ -183,10 +163,8 @@
 
             <div class="dropdownn">
             <a href="login.php" role="button" >
-            <i class="fa-sharp fa-solid fa-cart-shopping fa-lg cart-hver" style="font-size: 28px;"></i></a>
-              <div class="dropdown-content">
-                <p>Login to add the product to your cart!</p>
-              </div>
+           </a>
+
             
             </div>
             
@@ -212,23 +190,23 @@
     include_once("connection.php"); 
     if(isset($_GET['page'])){
         $page = $_GET['page'];
-        if($page=="category"){
-            include_once("category.php");
+        if($page=="feedback"){
+            include_once("feedback.php");
         }
-        if($page=="product"){
-          include_once("product.php");
+        if($page=="article"){
+          include_once("article.php");
         }
-        if($page=="add_category"){
-          include_once("add_category.php");
+        if($page=="add_feedback"){
+          include_once("add_feedback.php");
         }
-        if($page=="update_category"){
-          include_once("update_category.php");
+        if($page=="update_feedback"){
+          include_once("update_feedback.php");
         }
-        if($page=="add_product"){
-          include_once("add_product.php");
+        if($page=="add_article"){
+          include_once("add_article.php");
         }
-        if($page=="update_product"){
-          include_once("update_product.php");
+        if($page=="update_article"){
+          include_once("update_article.php");
         }
         if($page=="back"){
           include_once("content.php");
@@ -236,11 +214,11 @@
         if($page=="home"){
           include_once("content.php");
         }
-        if($page=="detail_product"){
-          include_once("detail_product.php");
+        if($page=="detail_article"){
+          include_once("detail_article.php");
         }
         if($page=="show"){
-          include_once("show_product.php");
+          include_once("show_article.php");
         }
         if($page=="polo"){
           include_once("polo.php");
@@ -277,22 +255,22 @@
             <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
               <!-- Content -->
               <h6 class="text-uppercase fw-bold mb-4">
-                <i class=""></i>ATN
+                <i class=""></i>GW MAGEZINE
               </h6>
               <p>
-              This is an online sales website with great toys.
+              This is a page to show some article about eduction of schoole
               
             </div>
 
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
               <h6 class="text-uppercase fw-bold mb-4">
-                Products
+                Article
               </h6>
               <p>
-                <a href="#!" class="text-reset" style="text-decoration: none;">Robot</a>
+                <a href="#!" class="text-reset" style="text-decoration: none;">Shool</a>
               </p>
               <p>
-                <a href="#!" class="text-reset" style="text-decoration: none;">Lego</a>
+                <a href="#!" class="text-reset" style="text-decoration: none;">Social</a>
               </p>
             </div>
 
@@ -301,13 +279,13 @@
                 Useful
               </h6>
               <p>
-                <a href="#!" class="text-reset" style="text-decoration: none;">Pricing</a>
+                <a href="#!" class="text-reset" style="text-decoration: none;">Article</a>
               </p>
               <p>
                 <a href="#!" class="text-reset" style="text-decoration: none;">Settings</a>
               </p>
               <p>
-                <a href="#!" class="text-reset" style="text-decoration: none;">Orders</a>
+                <a href="#!" class="text-reset" style="text-decoration: none;">Download</a>
               </p>
               <p>
                 <a href="#!" class="text-reset" style="text-decoration: none;">Help</a>

@@ -37,7 +37,7 @@
 <br>
 <div class="container1">
 <div>
-    <p style="margin-bottom: 10px; margin-left: 20px;">ADD PRODUCT</p>
+    <p style="margin-bottom: 10px; margin-left: 20px;">ADD ARTICLE</p>
 <div>
   <form action="" method="POST" enctype="multipart/form-data">
   <div class="row">
@@ -101,7 +101,7 @@
   <br>
   <div class="row">
     <input type="submit" name="btnUpdate" id="btnUpdate" value="Update">
-    <a href="?page=product" class="btn_back"><span>Back &#10148; </span></a>
+    <a href="?page=article" class="btn_back"><span>Back &#10148; </span></a>
   </div>
  
   </form>
@@ -155,7 +155,7 @@
                 WHERE ShiID='$id'";
 
               mysqli_query($conn, $sqlstring);
-              echo'<meta http-equiv="refresh" content="0;URL=index.php?page=product"/>';
+              echo'<meta http-equiv="refresh" content="0;URL=index.php?page=article"/>';
             }else{
               echo "<li>Duplicat product ID or NAME</li>";
             }
@@ -174,7 +174,7 @@
                     ShiDate= '".date('Y-m-d H:i:s')."' WHERE ShiID='$id'";
 
                     mysqli_query($conn, $sqlstring);
-                    echo'<meta http-equiv="refresh" content="0;URL=index.php?page=product"/>';
+                    echo'<meta http-equiv="refresh" content="0;URL=index.php?page=article"/>';
             }else{
               echo "<li>Duplicat product NAME</li>";
             }
@@ -188,6 +188,6 @@
 <?php
 }
 else{
-  echo '<meta http-equiv="refresh" content="0;URL=index.php?page=product"/>';
+  echo '<meta http-equiv="refresh" content="0;URL=index.php?page=article"/>';
 }
 ?>

@@ -14,13 +14,13 @@
 
 <br>
 <div class="container1">
-    <p style="margin-bottom: 0px;">UPDATE CATEGORY</p>
+    <p style="margin-bottom: 0px;">UPDATE ARTICLE</p>
 <div>
 <div class="container1">
   <form action="" method="POST">
   <div class="row">
     <div class="col-25">
-      <label for="">ID category</label>
+      <label for="">ID ARTICLE</label>
     </div>
     <div class="col-75">
       <input type="text" id="txtID" name="txtID" readonly placeholder="Catepgy ID" value="<?php echo $cat_id ;?>">
@@ -28,7 +28,7 @@
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="">Name</label>
+      <label for="">TITLE</label>
     </div>
     <div class="col-75">
       <input type="text" id="txtName" name="txtName" placeholder="Name category" value="<?php echo $cat_name ;?>">
@@ -36,13 +36,24 @@
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="">Description</label>
+      <label for="">STATUS</label>
     </div>
     <div class="col-75">
       <input type="text" id="txtDes" name="txtDes" placeholder="Description of category" value="<?php echo $cat_des ;?>">
     </div>
   </div>
-  
+  <div class="row">
+    <div class="col-25">
+      <label for="">STATUS</label>
+    </div>
+    <div class="col-75">
+    <form action="upload.php" method="post" enctype="multipart/form-data">
+  Select image to upload:
+  <input type="file" name="fileToUpload" id="fileToUpload">
+  <input type="submit" value="Upload Image" name="submit">
+</form>
+    </div>
+  </div>
   
   <br>
   <div class="row">
@@ -57,7 +68,23 @@
 		echo '<meta http-equiv"refresh" content="0,URL=Category_Management.php"/>';
 	}
 	?>
-
+<?php
+$target_dir = "uploads/";
+$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$uploadOk = 1;
+$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+// Check if image file is a actual image or fake image
+if(isset($_POST["submit"])) {
+  $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+  if($check !== false) {
+    echo "File is an image - " . $check["mime"] . ".";
+    $uploadOk = 1;
+  } else {
+    echo "File is not an image.";
+    $uploadOk = 0;
+  }
+}
+?>
 <?php
 		if(isset($_POST["btnUpdate"])){
 			$id = $_POST["txtID"];

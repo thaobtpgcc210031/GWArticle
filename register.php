@@ -20,10 +20,13 @@ if(isset($_POST['btnRegister'])){
 	$email = $_POST['txtEmail'];
 	$tele = $_POST['txtPhone'];
 	$address = $_POST['txtAddress'];	
+  $department = $_POST['txtDepartment'];
+  $role = $_POST['txtRoleID'];
+  
 	$err = "";
 
 	if($us==""||$pass1=="" ||$pass2==""||$fullname==""
-	||$email==""||$address==""||$tel=""){
+	||$email==""||$address==""||$tel=""||$department=""||$role=""){
 		$err .="<li>Enter information fully, please</li>";
 	}
 	
@@ -45,7 +48,7 @@ if(isset($_POST['btnRegister'])){
         $sq = "SELECT * FROM user WHERE Username='$us' OR email='$email'";
         $res = mysqli_query($conn,$sq);
         if(mysqli_num_rows($res)==0){
-            mysqli_query($conn, "INSERT INTO user (Username, Password, email, fullName, address ,telephone,admin)
+            mysqli_query($conn, "INSERT INTO user (Username, Password, email, fullName, address ,telephone, admin)
                                 VALUES ('$us','$pass' ,'$email','$fullname','$address','$tele','0')") or die(mysqli_error($conn));
                                 echo "You have registered successfully";
         }else{
@@ -72,6 +75,8 @@ if(isset($_POST['btnRegister'])){
           <input type="text" name="txtEmail" id="txtEmail" placeholder="email"/>
           <input type="text" name="txtPhone" id="txtPhone" placeholder="phone number"/>
           <input type="text" name="txtAddress" id="txtAddress" placeholder="address"/>
+          <input type="text" name="txtDepartment" id="txtDepartment" placeholder="department"/>
+          <input type="text" name="txtRoleID" id="txtRoleID" placeholder="roleID"/>
           <button type="submit" name="btnRegister" id="btnRegister" value="Register">REGISTER</button>
           <p class="message">Already have an account! <a href="login.php">LOGIN</a></p>
         </form>

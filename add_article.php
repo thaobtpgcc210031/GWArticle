@@ -6,7 +6,7 @@
 		$sqlstring = "SELECT Cat_ID, Cat_Name FROM category";
 		$result = mysqli_query($conn, $sqlstring);
 		echo "<select name='CategoryList'>
-				<option value ='0'>Choose Category</option>";
+				<option value ='0'>Contribution</option>";
 				while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 					echo "<option value='".$row['Cat_ID']."'>".$row['Cat_Name']."</option>";
 				}
@@ -54,7 +54,7 @@
 								VALUES ('$id', '$shirtname', $shirtprice, '$shirtdes', '".date('Y-m-d H:i:s')."',
 								$shirtqty, '$filePic', '$category')";
 							mysqli_query($conn, $sqlstring);
-							echo'<meta http-equiv="refresh" content="0;URL=index.php?page=product"/>';
+							echo'<meta http-equiv="refresh" content="0;URL=index.php?page=article"/>';
 						}else{
 							echo "<li>Duplicat product ID or NAME</li>";
 						}
@@ -74,28 +74,28 @@
 <br>
 <div class="container1">
 <div>
-    <p style="margin-bottom: 10px; margin-left: 20px;">ADD PRODUCT</p>
+    <p style="margin-bottom: 10px; margin-left: 20px;">ADD ARTICLE</p>
 <div>
   <form action="" method="POST" enctype="multipart/form-data">
   <div class="row">
     <div class="col-25">
-      <label for="">Product ID</label>
+      <label for="">ARTICLE ID</label>
     </div>
     <div class="col-75">
-      <input type="text" id="txtID" name="txtID" placeholder="ID of shirt...">
+      <input type="text" id="txtID" name="txtID" placeholder="">
     </div>
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="">Name</label>
+      <label for="">ACADEMIC YEAR</label>
     </div>
     <div class="col-75">
-      <input type="text" id="txtName" name="txtName" placeholder="Name of shirt...">
+      <input type="text" id="txtName" name="txtName" placeholder="">
     </div>
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="">Category</label>
+      <label for="">CONTRIBUTION</label>
     </div>
     <div class="col-75">
       <?php bind_Category($conn)  ?>
@@ -103,26 +103,26 @@
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="">Price</label>
+      <label for="">PUBLIC DATE</label>
     </div>
     <div class="col-75">
-      <input type="text" id="txtPrice" name="txtPrice" placeholder="Price of shirt...">
+      <input type="text" id="txtPrice" name="txtPrice" placeholder="">
     </div>
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="">Description</label>
+      <label for="">CLOSURE DATE</label>
     </div>
     <div class="col-75">
-      <input type="text" id="txtDes" name="txtDes" placeholder="Description of shirt...">
+      <input type="text" id="txtDes" name="txtDes" placeholder="">
     </div>
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="">Quantity</label>
+      <label for="">FINAL CLOSURE DATE</label>
     </div>
     <div class="col-75">
-      <input type="text" id="txtQty" name="txtQty" placeholder="Quantity...">
+      <input type="text" id="txtQty" name="txtQty" placeholder="">
     </div>
   </div>
   <div class="row">
@@ -138,7 +138,7 @@
   <br>
   <div class="row">
     <input type="submit" name="btnAdd" id="btnAdd" value="ADD">
-    <a href="?page=product" class="btn_back"><span>Back &#10148; </span></a>
+    <a href="?page=article" class="btn_back"><span>Back &#10148; </span></a>
   </div>
  
   </form>
