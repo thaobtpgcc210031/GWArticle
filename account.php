@@ -1,28 +1,28 @@
 <?php
 include_once("connection.php");
     //get data from db
-    $query = " SELECT * From user where Username = '" .$_SESSION["us"]. "'";
+    $query = " SELECT * From users where Username = '" .$_SESSION["us"]. "'";
     $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
     $us = $_SESSION["us"];
     $name = $row["fullName"];
-    $mail = $row["email"];
-    $tel = $row["telephone"];
-    $address = $row["address"];
+    $mail = $row["Email"];
+    $tel = $row["Phone"];
+    $address = $row["Address"];
 
-    //echo $us , $name, $mail, $tel, $address;
 
     //update
     if(isset($_POST["btnUpdate"])){
         $name = $_POST["txtName"];
         $tel = $_POST["txtPhone"];
         $address = $_POST["txtAdd"];
+        $mail = $_POST["txtMail"];
 
         $test = check();
         if($test==""){
-            $sq = "UPDATE user SET fullName='$name' , address='$address',
-                            telephone='$tel' WHERE Username = '" .$_SESSION['us']."'";
+            $sq = "UPDATE users SET fullName='$name' , Address='$address', Email='$mail',
+                            Phone='$tel' WHERE Username = '$us'";
             mysqli_query($conn,$sq) or die(mysqli_error($conn));   
             echo '<meta http-equiv="refresh" content="0;URL=index.php?page=home"/>';
  
@@ -78,7 +78,7 @@ input.btnUpd:hover{
          </div>
         <div class="acinf">
             <label style="float: left;" for=""class="lblTitle"> Mail</label>
-            <input type="text" value="<?php echo $mail?>" readonly>
+            <input type="text" id="txtMail" name="txtMail" value="<?php echo $mail?>">
         </div>
         <div class="acinf">
             <label style="float: left;" for=""class="lblTitle"> Phone</label>

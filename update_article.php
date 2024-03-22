@@ -3,15 +3,15 @@
 <?php
 	include_once("connection.php");
 	function bind_Category_List($conn, $selectedValue){
-		$sqlstring = "SELECT Cat_ID, Cat_Name FROM category";
+		$sqlstring = "SELECT * FROM magazine";
 		$result = mysqli_query($conn, $sqlstring);
 		echo "<select name='CategoryList'>
 				<option value ='0'>Choose Category</option>";
 				while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-					if($row['Cat_ID']== $selectedValue){
-						echo "<option value='" . $row['Cat_ID']."' selected>".$row['Cat_Name']."</option>";
+					if($row['MagazineID']== $selectedValue){
+						echo "<option value='" . $row['MagazineID']."' selected>".$row['Cat_Name']."</option>";
 					}else{
-						echo "<option value='" .$row['Cat_ID']."'>".$row['Cat_Name']."</option>";
+						echo "<option value='" .$row['MagazineID']."'>".$row['Cat_Name']."</option>";
 					}
 				}
 		echo "</select>";
@@ -19,17 +19,17 @@
 
 	if(isset($_GET["id"])){
 		$id = $_GET["id"];
-    $sqlstring="Select ShiName, ShiPrice, ShiDes, ShiDate, ShiImg,
-    ShiQty, Cat_ID from shirt where ShiID='$id'";
+    $sqlstring="Select * From Magazine where MagazineID='$id'";
     $result = mysqli_query($conn, $sqlstring);
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
     
-		$shirtname = $row["ShiName"];
-		$shirtdes = $row["ShiDate"];
-		$shirtprice = $row["ShiPrice"];
-		$shirtqty = $row["ShiQty"];
-		$shirtpic = $row['ShiImg'];
-		$category = $row["Cat_ID"];
+		$maga = $row["MagazineID"];
+		$contri = $row["ContributionID"];
+		$aca = $row["AcaYear"];
+		$publ = $row["PublicationDate"];
+		$conte = $row['ContentM'];
+		$closure = $row["ClosureDate"];
+    $finalclo = $row["FinalClosureDate"];
 
 ?>
 
@@ -37,66 +37,65 @@
 <br>
 <div class="container1">
 <div>
-    <p style="margin-bottom: 10px; margin-left: 20px;">ADD ARTICLE</p>
+    <p style="margin-bottom: 10px; margin-left: 20px;">UDATE ARTICLE</p>
 <div>
   <form action="" method="POST" enctype="multipart/form-data">
   <div class="row">
     <div class="col-25">
-      <label for="">Shirt ID</label>
+      <label for="">ID</label>
     </div>
     <div class="col-75">
-      <input type="text" id="txtID" name="txtID" readonly value='<?php echo $id; ?>' placeholder="ID of shirt...">
+      <input type="text" id="txtID" name="txtID" readonly value='<?php echo $maga; ?>' placeholder="ID of shirt...">
     </div>
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="">Name</label>
+      <label for="">Contribution</label>
     </div>
     <div class="col-75">
-      <input type="text" id="txtName" name="txtName" value='<?php echo $shirtname; ?>' placeholder="Name of shirt...">
+      <input type="text" id="txtCon" name="txtCon" value='<?php echo $contri; ?>' placeholder="Name of shirt...">
     </div>
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="">Category</label>
+      <label for="">Academic Year</label>
     </div>
     <div class="col-75">
-      <?php bind_Category_List($conn, $category)  ?>
+      <input type="text" id="txtAca" name="txtAca" value='<?php echo $aca; ?>' placeholder="Price of shirt...">
     </div>
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="">Price</label>
+      <label for="">Public Date</label>
     </div>
     <div class="col-75">
-      <input type="text" id="txtPrice" name="txtPrice" value='<?php echo $shirtprice; ?>' placeholder="Price of shirt...">
+      <input type="text" id="txtPub" name="txtPub" value='<?php echo $publ; ?>' placeholder="Price of shirt...">
     </div>
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="">Description</label>
+      <label for="">Content</label>
     </div>
     <div class="col-75">
-      <input type="text" id="txtDes" name="txtDes" value='<?php echo $shirtdes; ?>' placeholder="Description of shirt...">
+      <input type="text" id="txtCont" name="txtCont" value='<?php echo $conte; ?>' placeholder="">
     </div>
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="">Quantity</label>
+      <label for="">Closure Date</label>
     </div>
     <div class="col-75">
-      <input type="text" id="txtQty" name="txtQty" value='<?php echo $shirtqty; ?>' placeholder="Quantity...">
+      <input type="text" id="txtClo" name="txtClo" value='<?php echo $closure; ?>' placeholder="">
     </div>
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="">Image</label>
+      <label for="">Final Closure Date</label>
     </div>
     <div class="col-75">
-      <input type="file" id="txtImage" name="txtImage" style="margin-top: 10px;" value='<?php echo $shirtpic;?>'/>
+      <input type="text" id="txtFClo" name="txtFClo" value='<?php echo $finalclo; ?>' placeholder="">
     </div>
   </div>
-  
   
   <br>
   <div class="row">
@@ -111,68 +110,68 @@
 
 <?php
   if(isset($_POST["btnUpdate"])){
-    $id = $_POST["txtID"];
-    $shirtname = $_POST["txtName"];
-    $shirtdes = $_POST["txtDes"];
-    $shirtprice = $_POST["txtPrice"];
-    $shirtqty = $_POST["txtQty"];
-    $shirtpic = $_FILES['txtImage'];
-    $category = $_POST["CategoryList"];
+		$contri = $_POST["txtCon"];
+		$aca = $_POST["txtAca"];
+		$publ = $_POST["txtPub"];
+		$conte = $_POST['txtCont'];
+		$closure = $_POST["txtClo"];
+    $finalclo = $_POST["txtFClo"];
 
 
     $err="";
     if(trim($id)==""){
       $err .= "<li>Enter ID </li>";
-    }
-    if(trim($shirtname)==""){
-      $err .= "<li>Enter name </li>";
-    }
-    if(trim($category)=="0"){
-      $err .= "<li>Choose category </li>";
-    }
-    if(!is_numeric($shirtprice)){
-      $err .= "<li>Must be number </li>";
-    }
-    if(!is_numeric($shirtqty)){
-      $err .= "<li>Must be number </li>";
-    }
-    if($err !=""){
-      echo "<ul>$err</ul>";
-    }else{
-      if($shirtpic['name']!=""){
-        if($shirtpic['type']=="image/jpg"  || $shirtpic['type']=="image/jpeg" || 
-          $shirtpic['type']=="image/png" || $shirtpic['type']=="image/gif"){
-            if($shirtpic['size'] <=614400){
-              $sq="SELECT * FROM shirt WHERE ShiID !='$id' and ShiName = '$shirtname'";
-              $result = mysqli_query($conn, $sq);
-              if(mysqli_num_rows($result)==0){
-                copy($shirtpic['tmp_name'], "product-imgs/".$shirtpic['name']);
-                $filePic = $shirtpic['name'];
+    // }
+    // if(trim($contri)==""){
+    //   $err .= "<li>Enter name </li>";
+    // }
+    // if(trim($aca)=="0"){
+    //   $err .= "<li>Choose category </li>";
+    // }
+    // if(trim($publ)){
+    //   $err .= "<li>Must be number </li>";
+    // }
+    // if(trim($shirtqty)){
+    //   $err .= "<li>Must be number </li>";
+    // }
+    // if($err !=""){
+    //   echo "<ul>$err</ul>";
+    // }else{
+    //   if($shirtpic['name']!=""){
+    //     if($shirtpic['type']=="image/jpg"  || $shirtpic['type']=="image/jpeg" || 
+    //       $shirtpic['type']=="image/png" || $shirtpic['type']=="image/gif"){
+    //         if($shirtpic['size'] <=614400){
+              // $sq="SELECT * FROM shirt WHERE ShiID !='$id' and ShiName = '$shirtname'";
+              // $result = mysqli_query($conn, $sq);
+              // if(mysqli_num_rows($result)==0){
+              //   copy($shirtpic['tmp_name'], "product-imgs/".$shirtpic['name']);
+              //   $filePic = $shirtpic['name'];
 
-                $sqlstring = "UPDATE shirt SET 
-                ShiName='$shirtname', ShiPrice=$shirtprice, ShiDes='$shirtdes',
-                ShiDate='".date('Y-m-d H:i:s')."',ShiQty=$shirtqty,ShiImg='$filePic', Cat_ID='$category'
-                WHERE ShiID='$id'";
+              //   $sqlstring = "UPDATE shirt SET 
+              //   ShiName='$shirtname', ShiPrice=$shirtprice, ShiDes='$shirtdes',
+              //   ShiDate='".date('Y-m-d H:i:s')."',ShiQty=$shirtqty,ShiImg='$filePic', Cat_ID='$category'
+              //   WHERE ShiID='$id'";
 
-              mysqli_query($conn, $sqlstring);
-              echo'<meta http-equiv="refresh" content="0;URL=index.php?page=article"/>';
-            }else{
-              echo "<li>Duplicat product ID or NAME</li>";
-            }
-          }else{
-            echo "Size of image too big";
-          }
+              // mysqli_query($conn, $sqlstring);
+              // echo'<meta http-equiv="refresh" content="0;URL=index.php?page=article"/>';
+      //       }else{
+      //         echo "<li>Duplicat product ID or NAME</li>";
+      //       }
+      //     }else{
+      //       echo "Size of image too big";
+      //     }
+      // }else{
+      //   echo "Image format is not correct";
+      // }
+
+
       }else{
-        echo "Image format is not correct";
-      }
-      }else{
-        $sq="Select * from shirt where ShiID = '$id' and ShiName='$shirtname'";
+        $sq="Select * from magazine where MagazineID = '$id' and ContentM = '$conte'";
             $result= mysqli_query($conn, $sq);
             if(mysqli_num_rows($result)==0){
-              $sqlstring="UPDATE shirt set ShiName='$shirtname', ShiPrice=$shirtprice,
-                    ShiDes='$shirtdes', ShiImg='$shirtpic', ShiQty=$shirtqty, Cat_ID='$category',
-                    ShiDate= '".date('Y-m-d H:i:s')."' WHERE ShiID='$id'";
-
+              $sqlstring="UPDATE magazine set ContributionID='$contri', AcaYear=$aca,
+                    PublicationDate='$publ', ContentM='$conte', ClosureDate=$closure, FinalClosureDate='$finalclo'
+                     WHERE MagazineID='$id'";
                     mysqli_query($conn, $sqlstring);
                     echo'<meta http-equiv="refresh" content="0;URL=index.php?page=article"/>';
             }else{
@@ -180,13 +179,11 @@
             }
           }
       }
-  }
-
-
+  // }
 ?>
 
 <?php
-}
+  }
 else{
   echo '<meta http-equiv="refresh" content="0;URL=index.php?page=article"/>';
 }

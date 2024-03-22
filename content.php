@@ -36,140 +36,132 @@
     color: black;
     border-radius: 75px;
   }
-  
+  .search-container {
+    float: right;
+    display:flex;
+    margin-left: 100%;
+
+  }
 </style>
 
 
 <section>
     <div class="owl-carousel owl-theme">
-        <div class="slide-item slItem_1"><img class="sl_img" src="./Img/slide1.jpg" alt=""></div>
-        <div class="slide-item slItem_2"><img class="sl_img" src="./Img/slide2.jpg" alt=""></div>
-        <div class="slide-item slItem_3"><img class="sl_img" src="./Img/slide3.jpg" alt=""></div>
-        <div class="slide-item slItem_4"><img class="sl_img" src="./Img/slide4.jpg" alt=""></div>
+        <div class="slide-item slItem_1"><img class="sl_img" src="./Img/slide1.png" alt=""></div>
+        <div class="slide-item slItem_2"><img class="sl_img" src="./Img/slide2.png" alt=""></div>
+        <div class="slide-item slItem_3"><img class="sl_img" src="./Img/slide3.png" alt=""></div>
+        <div class="slide-item slItem_4"><img class="sl_img" src="./Img/slide4.png" alt=""></div>
     </div>
 </section>
+<form method="post" action="index.php?page=search">
+              <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search...">
+                <button type="submit" id="search-btn" class="search-btn">Search</button>
+              </div>
+              <?php
+              if (isset($_POST['search-btn'])) {
+                $searching = $_POST['searching'];
+              }
+              ?>
 
-
-<div class="container-content-item">
-        <h2 style="text-align: center;padding-top:50px; padding-bottom: 20px;">// Popular Article //</h2>
-        <div class="container-fluid">
-        <div class="row"> 
+<style>
+    .container {
+        width: 80%;
+        margin: 0 auto;
+    }
+    .article-list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 20px;
+    }
+    .article {
+        padding: 10px;
+    }
+</style>
+<div class="container">
+    <h1>List of Articles</h1>
+    <div class="article-list">
         <?php
+        if(isset($_GET['page']) && $_GET['page'] == 'show'){
+            $show = $_GET['page'];
+        }else{
+            $show= '';
+        }
+        // Kết nối đến cơ sở dữ liệu
+        include_once("connection.php");
 
-		  	$result = mysqli_query($conn, "SELECT * FROM shirt where SoldQty > 10" );
-			
-			if (!$result) {
-                die('Invalid query: ' . mysqli_error($conn));
-                }					            
-			while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-			?>          
-          <div class="col-lg-3 	col-md-4 col-sm-6 col-12 content-item">                       
-            <a href="?page=detail_product&&id=<?php echo $row["ShiID"]; ?>" class="shirt-link">
-                <div class="card-item"> 
-                <img class="img-fluid" src="./Img/<?php echo $row['ShiImg'];?>" alt="">
-                </div>
-                <div class="shirt-title">
-                <?php echo $row['ShiName'];?>
-                </div>  
-                <div class="shirt-price" style="font-weight: bold;">
-                <?php echo $row['ShiPrice'];?>.00&nbsp;USD
-                </div>
+        // Số bài báo trên mỗi trang
+        $per_page = 8;
 
-            </a>
-        </div>
-        <?php
-          }
-          ?>
-          <div class="col-12 more-btn" style="text-align: center; padding-top:15px">
-            <a href="?page=show" style="text-decoration: none; color: black;" class="more-link">More Article &#10148;</a>
-          </div>
-        </div>
-      </div>
+        // Trang hiện tại (mặc định là trang 1)
+        $current_page = isset($_GET['page_number']) ? $_GET['page_number'] : 1;
+        $current_page = intval($current_page);
+
+
+        // Tính offset để truy vấn dữ liệu từ database
+        $offset = ($current_page > 1) ? ($current_page - 1) * $per_page : 0;
+
+        // Truy vấn dữ liệu từ database
+        $sql = "SELECT magazine.*, contributions.ImgCv, contributions.title 
+        FROM magazine 
+        LEFT JOIN contributions ON magazine.ContributionID = contributions.ContributionID 
+        LIMIT $offset, $per_page";
+
+        $result = mysqli_query($conn, $sql);
+
+        // Hiển thị dữ liệu
+        if ($result && mysqli_num_rows($result) > 0) { // Thêm kiểm tra $result
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<a href='?page=detail_article&&id=" . $row['MagazineID'] . "' class='article'>";
+                echo "<h2>" . $row['MagazineID'] . "</h2>";
+                echo "<p>" . $row['ContentM'] . "</p>";
+                // Hiển thị tên hình ảnh nếu có
+                if ($row['ImgCv']) {
+                    echo "<p>Tên hình ảnh: " . $row['ImgCv'] . "</p>";
+                } else {
+                    echo "<p>Không có hình ảnh.</p>";
+                }
+                // Hiển thị tiêu đề nếu có
+                if ($row['title']) {
+                    echo "<p>Tiêu đề: " . $row['title'] . "</p>";
+                }
+                echo "</a>";
+            }
+        } else {
+            echo "Không có bài báo nào.";
+        }
+        
+
+        // Truy vấn số lượng bài báo
+        $sql_total = "SELECT COUNT(*) AS total FROM magazine";
+        $result_total = mysqli_query($conn, $sql_total);
+        $row_total = mysqli_fetch_assoc($result_total);
+        $total_articles = $row_total['total'];
+
+        // Tính tổng số trang
+        $total_pages = ceil($total_articles / $per_page);
+
+        // Hiển thị các liên kết phân trang
+        echo "<div class='pagination'>";
+        if ($current_page > 1) {
+            echo "<a href='index.php?page=show&page_number=1'>First</a>";
+        }
+        for ($i = 1; $i <= $total_pages; $i++) {
+            if ($i == $current_page) {
+                echo "<span class='current'>$i</span>";
+            } else {
+                echo "<a href='index.php?page=show&page_number=$i'>$i</a>";
+            }
+        }
+        if ($current_page < $total_pages) {
+            echo "<a href='index.php?page=show&page_number=$total_pages'>Last</a>";
+        }
+        echo "</div>";
+
+        ?>
     </div>
-    <h2 style="text-align: center;padding-top:50px; padding-bottom: 20px;">// Most View //</h2>
-    <div class="container-fluid">
-        <div class="row"> 
-        <?php
-
-		  	$result = mysqli_query($conn, "SELECT * FROM shirt where Cat_ID = 'C02'" );
-			
-			if (!$result) {
-                die('Invalid query: ' . mysqli_error($conn));
-                }					            
-			while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-			?>          
-          <div class="col-lg-3 	col-md-4 col-sm-6 col-12 content-item">                       
-            <a href="?page=detail_product&&id=<?php echo $row["ShiID"]; ?>" class="shirt-link">
-                <div class="card-item"> 
-                <img class="img-fluid" src="./Img/<?php echo $row['ShiImg']?>" alt="">
-                </div>
-                <div class="shirt-title">
-                <?php echo $row['ShiName']?>
-                </div>  
-                <div class="shirt-price"style="font-weight: bold;">
-                <?php echo $row['ShiPrice']?>.00&nbsp;USD
-                </div>                
-            </a>
-        </div>  
-        <?php
-          }
-          ?>
-        </div>
-        <div class="col-12 more-btn" style="text-align: center; padding-top:15px">
-            <a href="?page=polo" style="text-decoration: none; color: black;" class="more-link">More Article &#10148;</a>
-          </div>
-      </div>
-    </div>
-
-    <h2 style="text-align: center;padding-top:50px;  padding-bottom: 20px;">// New Article //</h2>
-    <div class="container-fluid">
-        <div class="row"> 
-        <?php
-
-		  	$result = mysqli_query($conn, "SELECT * FROM shirt where Cat_ID = 'C01'" );
-			
-			if (!$result) {
-                die('Invalid query: ' . mysqli_error($conn));
-                }					            
-			while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-			?>          
-          <div class="col-lg-3 	col-md-4 col-sm-6 col-12 content-item">                       
-            <a href="?page=detail_product&&id=<?php echo $row["ShiID"]; ?>" class="shirt-link">
-                <div class="card-item"> 
-                <img class="img-fluid" src="./Img/<?php echo $row['ShiImg']?>" alt="">
-                </div>
-                <div class="shirt-title">
-                <?php echo $row['ShiName']?>
-                </div>  
-                <div class="shirt-price"style="font-weight: bold;">
-                <?php echo $row['ShiPrice']?>.00&nbsp;USD
-                </div>                
-            </a>
-        </div>  
-        <?php
-          }
-          ?>
-          <div class="col-12 more-btn" style="text-align: center; padding-top:15px">
-            <a href="?page=tshirt" style="text-decoration: none; color: black;" class="more-link">More Article &#10148;</a>
-          </div>
-        </div>
-      </div>
-      <div class="container-fluid" style="padding-top: 50px;">
-          <hr>
-          <div style="position: absolute;" class="bttm-content">
-            <h1>"----------------------"</h1>
-            <p style="font-size: larger;">contact us with</p>
-            <div class="social">
-              <a href="https://www.facebook.com/" class="fa fa-facebook"></a>
-              <a href="https://twitter.com/" class="fa fa-twitter"></a>
-              <a href="https://www.instagram.com/" class="fa fa-instagram"></a>
-            </div>
-          </div>
-          <div class="col-12"><img src="./Img/bottomctent.jpg" alt="" style="width: 100%; height:500px;"></div>      
-      </div>
-    </div>
-
 </div>
+
 <script src="./OwlCarousel/docs/assets/vendors/jquery.min.js"></script>
 <script src="./OwlCarousel/dist/owl.carousel.min.js"></script>
 <script>

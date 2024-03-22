@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trang Bài Báo Khoa Học</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background-color: #f2f2f2;
+    }
+    .article {
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .left-panel {
+        flex: 1;
+        padding: 20px;
+    }
+    .left-panel img {
+        width: 100%;
+        border-radius: 5px;
+    }
+    .middle-panel {
+        flex: 2;
+        padding: 20px;
+    }
+    .right-panel {
+        flex: 1;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .pdf-link {
+        margin-top: auto;
+    }
+    .pdf-link a {
+        display: block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    .pdf-link a:hover {
+        background-color: #0056b3;
+    }
+    .article-image {
+        margin-top: 20px;
+        max-width: 60%; /* Điều chỉnh kích thước */
+        height: auto;
+        text-align: center; /* Căn giữa hình ảnh */
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="article">
+        <div class="left-panel">
+            <img src="cover_image.jpg" alt="Bìa bài báo">
+        </div>
+        <div class="middle-panel">
+            <h1>Tiêu đề bài báo</h1>
+            <p>
+                Đây là phần mô tả của bài báo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget lectus justo. Sed commodo convallis ante vel gravida. Proin id convallis purus.
+            </p>
+        </div>
+        <div class="right-panel">
+            <div class="pdf-link">
+                <a href="path_to_your_pdf_file.pdf" target="_blank">Tải tệp PDF</a>
+            </div>
+        </div>
+    </div>
+    <div class="article-image">
+        <img src="sample_page.jpg" alt="Hình ảnh trang mẫu của bài báo">
+    </div>
+</div>
+</body>
+</html>

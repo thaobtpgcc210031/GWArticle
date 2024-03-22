@@ -2,7 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./Css/style.css">
-<title> ATN | Login</title>
+<title> GW | Login</title>
 </head>
 <?php
 if(isset($_POST['btnLogin'])){
@@ -25,12 +25,14 @@ if(isset($_POST['btnLogin'])){
 		include_once("connection.php");
 		$pass = md5($pa);
 		$us= mysqli_real_escape_string($conn, $us);
-		$res = mysqli_query($conn, "SELECT * FROM user WHERE Username='$us' and Password='$pass'") or die(mysqli_error($conn));
+		$res = mysqli_query($conn, "SELECT * FROM users WHERE Username='$us' and Password='$pass'") or die(mysqli_error($conn));
 		$row = mysqli_fetch_array($res, MYSQLI_ASSOC);
     
 		if(mysqli_num_rows($res)==1){
-      $ad = $row['admin'];
-      $_SESSION["admin"] = $ad;
+      $Role = $row['Role'];
+      $name = $row['fullName'];
+      $_SESSION["role"] = $Role;
+      $_SESSION["fullName"] = $name;
 			$_SESSION["us"] = $us;
       echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';
 		}else{
