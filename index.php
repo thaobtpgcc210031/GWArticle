@@ -112,7 +112,7 @@ include_once("connection.php");
                 CONTRIBUTIONS
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#" style="font-weight: bold;">Submit</a></li>
+                <li><a class="dropdown-item" href="?page=contribution" style="font-weight: bold;">Submit</a></li>
                 <li><a class="dropdown-item" href="#" style="font-weight: bold;">Your Submit</a></li>
               </ul>
             </li>
@@ -140,7 +140,7 @@ include_once("connection.php");
                 </a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="?page=article" style="font-weight: bold;">Article</a></li>
-                  <li><a class="dropdown-item" href="?page=polo" style="font-weight: bold;">Account</a></li>
+                  <li><a class="dropdown-item" href="?page=manage_account" style="font-weight: bold;">Account</a></li>
                   <li><a class="dropdown-item" href="?page=show" style="font-weight: bold;">All..</a></li>
   
                 </ul>
@@ -186,7 +186,7 @@ include_once("connection.php");
           }
           ?>
           <li class="nav-item">
-            <a class="nav-link active" href="#" style="font-weight: bold;">ABOUT US</a>
+            <a class="nav-link active" href="?page=about" style="font-weight: bold;">ABOUT US</a>
           </li>
 
         </ul>
@@ -279,8 +279,11 @@ include_once("connection.php");
     if ($page == "polo") {
       include_once("polo.php");
     }
-    if ($page == "tshirt") {
-      include_once("tshirt.php");
+    if ($page == "about") {
+      include_once("about.php");
+    }  
+    if ($page == "contribution") {
+      include_once("contribution.php");
     }
     if ($page == "account") {
       include_once("account.php");
@@ -291,7 +294,12 @@ include_once("connection.php");
     if ($page == "search") {
       include_once("search.php");
     }
-    
+    if ($page == "manage_account") {
+      include_once("manage_account.php");
+    }
+    if ($page == "add_contribution") {
+      include_once("add_contribution.php");
+    }
   } else {
     include_once("content.php");
   }

@@ -30,38 +30,36 @@
 <table style="width:100%">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Contribution</th>
-        <th>Academic Year</th>
-        <th>Public Date</th>
-        <th>Content</th>
-        <th>Closure Date</th>
-        <th>Final Closure Date</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <th>Username</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Department</th>      
+        <th>Address</th>
+        <th>Phone</th>
       </tr>  
     </thead>  
     <tbody>
             <?php
                 include_once("connection.php");
                 $No=1;
-                $result = mysqli_query($conn, "SELECT * FROM magazine");
+                $result = mysqli_query($conn, "SELECT * FROM users");
                 while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
             ?>
 			<tr>
 
-              <td style="text-align: center;"><?php echo $row["MagazineID"];?></td>
-              <td style="text-align: center;"><?php echo $row["ContributionID"];?></td>
-              <td style="text-align: center;"><?php echo $row["AcaYear"];?></td>
-              <td style="text-align: center;"><?php echo $row["PublicationDate"];?></td>
-              <td style="text-align: center;"><?php echo $row["ContentM"];?></td>
-              <td style="text-align: center;"><?php echo $row["ClosureDate"];?></td>
-              <td style="text-align: center;"><?php echo $row["FinalClosureDate"];?></td>
+              <td style="text-align: center;"><?php echo $row["Username"];?></td>
+              <td style="text-align: center;"><?php echo $row["fullName"];?></td>
+              <td style="text-align: center;"><?php echo $row["Email"];?></td>
+              <td style="text-align: center;"><?php echo $row["Role"];?></td>
+              <td style="text-align: center;"><?php echo $row["Depart"];?></td>
+              <td style="text-align: center;"><?php echo $row["Address"];?></td>
+              <td style="text-align: center;"><?php echo $row["Phone"];?></td>
               <td style='text-align:center'>
-              <a href="?page=update_article&&id=<?php echo $row["MagazineID"]; ?>" style="color: green; text-decoration: none;">
+              <a href="?page=update_article&&id=<?php echo $row["UserID"]; ?>" style="color: green; text-decoration: none;">
               &#9998;</a></td>
               <td style='text-align:center'>
-              <a href="article.php?function=del&&id=<?php echo $row["MagazineID"]; ?>" style="color: red; text-decoration: none;" 
+              <a href="article.php?function=del&&id=<?php echo $row["UserID"]; ?>" style="color: red; text-decoration: none;" 
               onclick="return deleteConfirm()">&#10006;</a></td>
               
             </tr>
