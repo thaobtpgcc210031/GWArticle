@@ -48,7 +48,7 @@ if (isset($_GET["id"])) {
                             <label for="">Department ID</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" id="txtID" name="txtID" readonly value='<?php echo $maga; ?>' placeholder="ID of shirt...">
+                            <input type="text" id="txtID" name="txtID" readonly value='<?php echo $maga; ?>' placeholder="ID of ...">
                         </div>
                     </div>
                     <div class="row">
@@ -56,7 +56,7 @@ if (isset($_GET["id"])) {
                             <label for="">Department Name</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" id="txtCon" name="txtCon" value='<?php echo $contri; ?>' placeholder="Name of shirt...">
+                            <input type="text" id="txtCon" name="txtCon" value='<?php echo $contri; ?>' placeholder="Name of ...">
                         </div>
                     </div>
                     <div class="row">
@@ -64,7 +64,7 @@ if (isset($_GET["id"])) {
                             <label for="">Description Year</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" id="txtAca" name="txtAca" value='<?php echo $aca; ?>' placeholder="Price of shirt...">
+                            <input type="text" id="txtAca" name="txtAca" value='<?php echo $aca; ?>' placeholder="">
                         </div>
                     </div>
                     <!-- <div class="row">
@@ -103,7 +103,7 @@ if (isset($_GET["id"])) {
                     <br>
                     <div class="row">
                         <input type="submit" name="btnUpdate" id="btnUpdate" value="Update">
-                        <a href="?page=article" class="btn_back"><span>Back &#10148; </span></a>
+                        <a href="?page=faculty" class="btn_back"><span>Back &#10148; </span></a>
                     </div>
 
                 </form>

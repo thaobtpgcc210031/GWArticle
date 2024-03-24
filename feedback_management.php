@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="./Css/cate.css"/>
+<!-- <link rel="stylesheet" href="./Css/cate.css"/>
 	<meta charset="utf-8" />
     <script langguae="javascript">
         function deleteConfirm(){
@@ -51,7 +51,7 @@
             ?>
 			<tr>
 
-              <td style="text-align: center;"><?php echo $row["ContributionID"];?></td>
+              <td style="text-align: center;"><?php echo $row["CommentID"];?></td>
               <td style="text-align: center;"><?php echo $row["Username"];?></td>
               <td style="text-align: center;"><?php echo $row["Comment"];?></td>
               <td style='text-align:center'>
@@ -72,4 +72,4 @@
 <h2></h2>
 
 
-</div>
+</div> -->
