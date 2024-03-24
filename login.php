@@ -2,6 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./Css/style.css">
+<link rel="icon" href="./Icon/icon.ico" type="image/x-icon">
 <title> GW | Login</title>
 </head>
 <?php
