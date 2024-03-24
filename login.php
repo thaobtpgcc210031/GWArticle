@@ -48,7 +48,7 @@ if(isset($_POST['btnLogin'])){
       <div class="form">
         <div class="login">
           <div class="login-header">
-            <h3>WELCOM</h3>
+            <h3>WELCOME</h3>
           </div>
         </div>
         <form class="login-form" method="POST">
