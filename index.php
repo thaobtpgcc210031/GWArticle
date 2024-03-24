@@ -141,6 +141,13 @@ include_once("connection.php");
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="?page=article" style="font-weight: bold;">Article</a></li>
                   <li><a class="dropdown-item" href="?page=manage_account" style="font-weight: bold;">Account</a></li>
+
+                  <li><a class="dropdown-item" href="?page=faculty" style="font-weight: bold;">Faculty</a></li>
+
+                  <li><a class="dropdown-item" href="?page=feedback_manage" style="font-weight: bold;">Manage Feedback</a></li>
+
+
+
                   <li><a class="dropdown-item" href="?page=show" style="font-weight: bold;">All..</a></li>
   
                 </ul>
@@ -299,6 +306,21 @@ include_once("connection.php");
     }
     if ($page == "add_contribution") {
       include_once("add_contribution.php");
+    }
+    if($page == "faculty"){
+      include_once("faculty_management.php");
+    }
+    if($page == "add_faculty"){
+      include_once("add_faculty.php");
+    }
+    if($page == "update_faculty"){
+      include_once("update_faculty.php");
+    }
+    if($page == "create_feedback"){
+      include_once("create_feedback.php");
+    }
+    if($page == "feedback_manage"){
+      include_once("feedback_management.php");
     }
   } else {
     include_once("content.php");
