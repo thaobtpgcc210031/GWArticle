@@ -45,7 +45,7 @@
       <label for="">ID</label>
     </div>
     <div class="col-75">
-      <input type="text" id="txtID" name="txtID" readonly value='<?php echo $maga; ?>' placeholder="ID of shirt...">
+      <input type="text" id="txtID" name="txtID" readonly value='<?php echo $maga; ?>' placeholder="">
     </div>
   </div>
   <div class="row">
@@ -53,7 +53,7 @@
       <label for="">Contribution</label>
     </div>
     <div class="col-75">
-      <input type="text" id="txtCon" name="txtCon" value='<?php echo $contri; ?>' placeholder="Name of shirt...">
+      <input type="text" id="txtCon" name="txtCon" value='<?php echo $contri; ?>' placeholder="">
     </div>
   </div>
   <div class="row">
@@ -61,7 +61,7 @@
       <label for="">Academic Year</label>
     </div>
     <div class="col-75">
-      <input type="text" id="txtAca" name="txtAca" value='<?php echo $aca; ?>' placeholder="Price of shirt...">
+      <input type="text" id="txtAca" name="txtAca" value='<?php echo $aca; ?>' placeholder="">
     </div>
   </div>
   <div class="row">
@@ -69,7 +69,7 @@
       <label for="">Public Date</label>
     </div>
     <div class="col-75">
-      <input type="text" id="txtPub" name="txtPub" value='<?php echo $publ; ?>' placeholder="Price of shirt...">
+      <input type="text" id="txtPub" name="txtPub" value='<?php echo $publ; ?>' placeholder="">
     </div>
   </div>
   <div class="row">
@@ -168,7 +168,7 @@
       }else{
         $sq="Select * from magazine where MagazineID = '$id' and ContentM = '$conte'";
             $result= mysqli_query($conn, $sq);
-            if(mysqli_num_rows($result)==0){
+            if(mysqli_num_rows($result)==1){
               $sqlstring="UPDATE magazine set ContributionID='$contri', AcaYear=$aca,
                     PublicationDate='$publ', ContentM='$conte', ClosureDate=$closure, FinalClosureDate='$finalclo'
                      WHERE MagazineID='$id'";

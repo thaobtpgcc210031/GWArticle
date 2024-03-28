@@ -21,7 +21,7 @@
     ?>
     <br>
 <div class="container1">
-    <p>ARTICLE MANAGERMENT</p>
+    <p>ACCOUNT MANAGERMENT</p>
 <div>
 <a href="?page=add_article"><button class="button" style="vertical-align:middle"><span>ADD </span></button></a>
 <a href="?page=back"><button class="button" style="vertical-align:middle"><span>BACK &#10148; </span></button></a>
@@ -56,21 +56,19 @@
               <td style="text-align: center;"><?php echo $row["Address"];?></td>
               <td style="text-align: center;"><?php echo $row["Phone"];?></td>
               <td style='text-align:center'>
-              <a href="?page=update_article&&id=<?php echo $row["UserID"]; ?>" style="color: green; text-decoration: none;">
+              <a href="?page=update_account&&id=<?php echo $row["UserID"]; ?>" style="color: green; text-decoration: none;">
               &#9998;</a></td>
               <td style='text-align:center'>
-              <a href="article.php?function=del&&id=<?php echo $row["UserID"]; ?>" style="color: red; text-decoration: none;" 
+              <a href="article.php?function=del&&id=<?php echo $row["UserID"];?>" style="color: red; text-decoration: none;" 
               onclick="return deleteConfirm()">&#10006;</a></td>
               
             </tr>
             <?php
                 $No++;
                 }
-                
             ?>
 			</tbody>    
-</table>
-<h2></h2>
+</table>            
 
 
 </div>

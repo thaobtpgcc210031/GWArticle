@@ -1,0 +1,49 @@
+@startuml
+
+left to right direction
+
+actor User as U
+actor Manager as M
+actor Admin as A
+actor Owner as O
+
+rectangle "Website" {
+    usecase (Đăng nhập) as UC1
+    usecase (Đăng xuất) as UC2
+    usecase (Xem sản phẩm) as UC3
+    usecase (Thêm sản phẩm) as UC4
+    usecase (Sửa sản phẩm) as UC5
+    usecase (Xóa sản phẩm) as UC6
+    usecase (Quản lý đơn hàng) as UC7
+    usecase (Thêm đơn hàng) as UC8
+    usecase (Sửa đơn hàng) as UC9
+    usecase (Xóa đơn hàng) as UC10
+    usecase (Xem loại sản phẩm) as UC11
+    usecase (Thêm loại sản phẩm) as UC12
+    usecase (Sửa loại sản phẩm) as UC13
+    usecase (Xóa loại sản phẩm) as UC14
+    usecase (Quản lý tài khoản) as UC15
+    usecase (Cấp role) as UC16
+    usecase (Xem thống kê) as UC17
+    
+    U --> UC1
+    U --> UC2
+    U --> UC3
+    M --> UC4
+    M --> UC5
+    M --> UC6
+    M --> UC7
+    M --> UC11
+    M --> UC12
+    M --> UC13
+    M --> UC14
+    M --> UC15
+    M --> UC16
+    O --> UC17
+    
+    UC7 --> UC8: include
+    UC7 --> UC9: include
+    UC7 --> UC10: include
+}
+
+@enduml

@@ -3,79 +3,43 @@
 <?php
 	include_once("connection.php");
 	function bind_Category($conn){
-		$sqlstring = "SELECT StudentID FROM contribution";
+		$sqlstring = "SELECT Cat_ID, Cat_Name FROM category";
 		$result = mysqli_query($conn, $sqlstring);
-		echo "<select name='Contribution'>
-				<option value ='0'>Contribution</option>";
+		echo "<select name='CategoryList'>
+				<option value ='0'>Choose Category</option>";
 				while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-					echo "<option value='".$row['StudentID']."</option>";
+					echo "<option value='".$row['Cat_ID']."'>".$row['Cat_Name']."</option>";
 				}
 		echo "</select>";
 	}
 
+    $sqlstudentid = "SELECT UserID FROM users WHERE Username = '".$_SESSION["us"]."'";
+
 	if(isset($_POST["btnAdd"])){
-		$id = $_POST["txtStudentID"];
-		$til = $_POST["txtTitle"];
-		$contentP = $_POST["txtContentp"];
-		$sub = $_POST["lblSubmissionDate"];
-		$status = $_POST["txtStatus"];
-		$file = $_FILES['txtFileP'];
-		$ImgCv = $_FILES["txtImageCv"];
-        $ImgS = $_FILES["txtImageSample"];
+		$id = $sqlstudentid;
+		$title = $_POST["txtTitle"];
+		$content = $_POST["txtContentP"];
+		$file = $_FILES["txtFile"];
+		$cv = $_FILES["txtCv"];
+		$sample = $_FILES['txtSample'];
+        $currentDateTime = date('Y-m-d H:i:s');
 		$err="";
-		if(trim($id)==""){
-			$err .= "<li>Enter ID </li>";
+		if(trim($title)==""){
+			$err .= "<li>Enter Title </li>";
 		}
-		if(trim($til)==""){
-			$err .= "<li>Enter name </li>";
-		}
-		if(trim($contentP)=="0"){
-			$err .= "<li>Choose contentP </li>";
-		}
-		if(date($sub)){
-			$err .= "<li>Must be choose date </li>";
-		}
-		if(!is_numeric($status)){
-			$err .= "<li>Enter status </li>";
-		}
-        if(!file($file)){
-			$err .= "<li>Enter File </li>";
-		}
-        if(!file($ImgCv)){
-			$err .= "<li>Enter image CV </li>";
-		}
-        if(!file($ImgS)){
-			$err .= "<li>Enter image sanple </li>";
-		}
-
-
 		if($err !=""){
 			echo "<ul>$err</ul>";
 		}else{
-			if($shirtpic['type']=="image/jpg"  || $shirtpic['type']=="image/jpeg" || 
-				$shirtpic['type']=="image/png" || $shirtpic['type']=="image/gif"){
-					if($shirtpic['size'] <=614400){
-						$sq="SELECT * FROM contribution WHERE StudentID ='$id' or Title= '$til'";
-						$result = mysqli_query($conn, $sq);
-						if(mysqli_num_rows($result)==0){
-							copy($ImgCv['tmp_name'], "product-imgs/".$ImgCv['name']);
-							$filePic = $ImgCv['name'];
-							$sqlstring = "INSERT INTO contribution(
-								StudentID, Title, ContentP, SubmissionDate, Status,
-								FileP,ImgCv, ImgSample)
-								VALUES ('$id', '$til', $contentP, '$sub', '".date('Y-m-d H:i:s')."',
-								$status, '$fileP', '$ImgCv', '$ImgS)";
+
+							copy($cv['tmp_name'], "imgs/cv/".$cv['name']);
+							$filePic = $cv['name'];
+							$sqlstring = "INSERT INTO contributions(
+								Title, ContentP, SubmissionDate, FileP, ImgCV,
+								ImgSample)
+								VALUES ('$title', '$content', '$currentDateTime', '$file', '$filePic','$sample')";
 							mysqli_query($conn, $sqlstring);
-							echo'<meta http-equiv="refresh" content="0;URL=index.php?page=contribution"/>';
-						}else{
-							echo "<li>Duplicat product ID or NAME</li>";
-						}
-					}else{
-						echo "Size of image too big";
-					}
-			}else{
-				echo "Image format is not correct";
-			}
+							echo'<meta http-equiv="refresh" content="0;URL=index.php?page=product"/>';
+	
 		}
 	}
 
@@ -91,15 +55,7 @@
   <form action="" method="POST" enctype="multipart/form-data">
   <div class="row">
     <div class="col-25">
-      <label for="">STUDENT ID</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="txtStudentID" name="txtStudentID" placeholder="">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <label for="">TITLE</label>
+      <label for="">Title</label>
     </div>
     <div class="col-75">
       <input type="text" id="txtTitle" name="txtTitle" placeholder="">
@@ -107,42 +63,27 @@
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="">CONTENT</label>
+      <label for="">Content</label>
     </div>
     <div class="col-75">
-      <input type="text" id="txtContentp" name="txtContentp" placeholder="">
+      <input type="text" id="txtContentP" name="txtContentP" placeholder="">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-25">
+      <label for="">File</label>
+    </div>
+    <div class="col-75">
+      <input type="file" id="txtFile" name="txtFile" style="margin-top: 10px;" value=""/>
     </div>
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="">SUBMISSTIONDATE</label>
+      <label for="">Image Cover</label>
     </div>
     <div class="col-75">
-      <input type="date" id="lblSubmissionDate" name="lblSubmissionDate" placeholder="">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <label for="">STATUS</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="txtStatus" name="txtStatus" placeholder="">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <label for="">FILE</label>
-    </div>
-    <div class="col-75">
-      <input type="file" id="txtFileP" name="txtFileP" placeholder="">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <label for="">Image CV</label>
-    </div>
-    <div class="col-75">
-      <input type="file" id="txtImageCv" name="txtImageCv" style="margin-top: 10px;" value=""/>
+      <input type="file" id="txtCv" name="txtCv" style="margin-top: 10px;" value=""/>
     </div>
   </div>
   <div class="row">
@@ -150,14 +91,15 @@
       <label for="">Image Sample</label>
     </div>
     <div class="col-75">
-      <input type="file" id="txtImageSample" name="txtImageSample" style="margin-top: 10px;" value=""/>
+      <input type="file" id="txtSample" name="txtSample" style="margin-top: 10px;" value=""/>
     </div>
   </div>
+  
   
   <br>
   <div class="row">
     <input type="submit" name="btnAdd" id="btnAdd" value="ADD">
-    <a href="?page=contribution" class="btn_back"><span>Back &#10148; </span></a>
+    <a href="?page=product" class="btn_back"><span>Back &#10148; </span></a>
   </div>
  
   </form>

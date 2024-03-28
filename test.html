@@ -1,96 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trang Bài Báo Khoa Học</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-    }
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        background-color: #f2f2f2;
-    }
-    .article {
-        width: 80%;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        background-color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    .left-panel {
-        flex: 1;
-        padding: 20px;
-    }
-    .left-panel img {
-        width: 100%;
-        border-radius: 5px;
-    }
-    .middle-panel {
-        flex: 2;
-        padding: 20px;
-    }
-    .right-panel {
-        flex: 1;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    .pdf-link {
-        margin-top: auto;
-    }
-    .pdf-link a {
-        display: block;
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-    }
-    .pdf-link a:hover {
-        background-color: #0056b3;
-    }
-    .article-image {
-        margin-top: 20px;
-        max-width: 60%; /* Điều chỉnh kích thước */
-        height: auto;
-        text-align: center; /* Căn giữa hình ảnh */
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Web</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        #left-panel {
+            flex: 1;
+            background-color: #f0f0f0;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        #right-panel {
+            flex: 1;
+            background-color: #e0e0e0;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .chat-container {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        .message {
+            background-color: #d3e9ff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        .user-message {
+            background-color: #e6ffe6;
+            align-self: flex-end;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            #left-panel, #right-panel {
+                flex: none;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <div class="article">
-        <div class="left-panel">
-            <img src="cover_image.jpg" alt="Bìa bài báo">
-        </div>
-        <div class="middle-panel">
-            <h1>Tiêu đề bài báo</h1>
-            <p>
-                Đây là phần mô tả của bài báo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget lectus justo. Sed commodo convallis ante vel gravida. Proin id convallis purus.
-            </p>
-        </div>
-        <div class="right-panel">
-            <div class="pdf-link">
-                <a href="path_to_your_pdf_file.pdf" target="_blank">Tải tệp PDF</a>
-            </div>
+    <div id="left-panel">
+        <!-- Hiển thị thông tin từ cơ sở dữ liệu -->
+        <div class="data-row">
+            <!-- Dữ liệu từ cơ sở dữ liệu sẽ được hiển thị ở đây -->
+            <?php
+include 'connection.php'; // Kết nối đến cơ sở dữ liệu
+
+// Truy vấn SQL để lấy dữ liệu từ bảng contributions
+$sql = "SELECT MagazineID, ContributionID, AcaYear, PublicationDate, ContentM, ClosureDate, FinalClosureDate FROM contributions";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Hiển thị dữ liệu trong một bảng HTML
+    echo '<table>';
+    echo '<tr><th>MagazineID</th><th>ContributionID</th><th>AcaYear</th><th>PublicationDate</th><th>ContentM</th><th>ClosureDate</th><th>FinalClosureDate</th></tr>';
+    while($row = $result->fetch_assoc()) {
+        echo '<tr>';
+        echo '<td>'.$row['MagazineID'].'</td>';
+        echo '<td>'.$row['ContributionID'].'</td>';
+        echo '<td>'.$row['AcaYear'].'</td>';
+        echo '<td>'.$row['PublicationDate'].'</td>';
+        echo '<td>'.$row['ContentM'].'</td>';
+        echo '<td>'.$row['ClosureDate'].'</td>';
+        echo '<td>'.$row['FinalClosureDate'].'</td>';
+        echo '</tr>';
+    }
+    echo '</table>';
+} else {
+    echo "Không có dữ liệu";
+}
+?>
         </div>
     </div>
-    <div class="article-image">
-        <img src="sample_page.jpg" alt="Hình ảnh trang mẫu của bài báo">
+
+    <div id="right-panel">
+        <!-- Khung chat -->
+        <div class="chat-container">
+            <div class="message">Xin chào!</div>
+            <div class="message user-message">Xin chào! Có gì mới không?</div>
+            <!-- Thêm các tin nhắn khác ở đây -->
+        </div>
     </div>
-</div>
+
+    <div class="clear"></div>
 </body>
 </html>

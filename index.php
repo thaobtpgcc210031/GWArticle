@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="./Css/style.css">
   <link rel="stylesheet" href="./Css/contentstyle.css">
   <link rel="stylesheet" href="./Css/contentmiddle.css">
-  <link rel="stylesheet" href="./Css/cart.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -57,6 +56,21 @@
   input[type="text"]:focus {
     background-color: #e6e6e6;
   }
+  input[type="password"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #D3D3D3;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+
+  input[type="password"]:focus {
+    background-color: #e6e6e6;
+  }
 
   button {
     padding: 10px 20px;
@@ -104,7 +118,7 @@ include_once("connection.php");
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#" style="font-weight: bold;">School</a></li>
                 <li><a class="dropdown-item" href="#" style="font-weight: bold;">Social</a></li>
-                <li><a class="dropdown-item" href="?page=show" style="font-weight: bold;">All..</a></li>
+                <li><a class="dropdown-item" href="#" style="font-weight: bold;">All..</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -112,7 +126,7 @@ include_once("connection.php");
                 CONTRIBUTIONS
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="?page=contribution" style="font-weight: bold;">Submit</a></li>
+                <li><a class="dropdown-item" href="?page=addcontri" style="font-weight: bold;">Submit</a></li>
                 <li><a class="dropdown-item" href="#" style="font-weight: bold;">Your Submit</a></li>
               </ul>
             </li>
@@ -122,13 +136,12 @@ include_once("connection.php");
           ?>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-weight: bold;">
-                ARTICLE
+                MANAGE CONTRIBUTIONS
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="?page=tshirt" style="font-weight: bold;">Shool</a></li>
+                <li><a class="dropdown-item" href="?page=submit" style="font-weight: bold;">View Contribution</a></li>
                 <li><a class="dropdown-item" href="?page=polo" style="font-weight: bold;">Social</a></li>
                 <li><a class="dropdown-item" href="?page=show" style="font-weight: bold;">All..</a></li>
-
               </ul>
             </li>
           <?php
@@ -151,12 +164,11 @@ include_once("connection.php");
             ?>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-weight: bold;">
-                  ARTICLE
+                  MANAGE
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="?page=tshirt" style="font-weight: bold;">Shool</a></li>
-                  <li><a class="dropdown-item" href="?page=polo" style="font-weight: bold;">Social</a></li>
-                  <li><a class="dropdown-item" href="?page=show" style="font-weight: bold;">All..</a></li> 
+                  <li><a class="dropdown-item" href="?page=tshirt" style="font-weight: bold;">Contributions</a></li>
+                  <li><a class="dropdown-item" href="?page=show" style="font-weight: bold;">Statistical</a></li> 
                 </ul>
               </li>
             <?php
@@ -168,9 +180,9 @@ include_once("connection.php");
                 ARTICLE
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="?page=tshirt" style="font-weight: bold;">School</a></li>
-                <li><a class="dropdown-item" href="?page=polo" style="font-weight: bold;">Social</a></li>
-                <li><a class="dropdown-item" href="?page=detail_article" style="font-weight: bold;">All..</a></li>
+                <li><a class="dropdown-item" href="login.php" style="font-weight: bold;">School</a></li>
+                <li><a class="dropdown-item" href="login.php" style="font-weight: bold;">Social</a></li>
+                <li><a class="dropdown-item" href="login.php" style="font-weight: bold;">All..</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -178,8 +190,8 @@ include_once("connection.php");
                 CONTRIBUTIONS
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="?page=tshirt" style="font-weight: bold;">Submit</a></li>
-                <li><a class="dropdown-item" href="?page=polo" style="font-weight: bold;">Your Submit</a></li>
+                <li><a class="dropdown-item" href="login.php" style="font-weight: bold;">Submit</a></li>
+                <li><a class="dropdown-item" href="login.php" style="font-weight: bold;">Your Submit</a></li>
               </ul>
             </li>
           <?php
@@ -276,8 +288,8 @@ include_once("connection.php");
     if ($page == "show") {
       include_once("show_article.php");
     }
-    if ($page == "polo") {
-      include_once("polo.php");
+    if ($page == "updateSubmit") {
+      include_once("updateSubmit.php");
     }
     if ($page == "about") {
       include_once("about.php");
@@ -288,8 +300,8 @@ include_once("connection.php");
     if ($page == "account") {
       include_once("account.php");
     }
-    if ($page == "cart") {
-      include_once("cart.php");
+    if ($page == "submit") {
+      include_once("submit.php");
     }
     if ($page == "search") {
       include_once("search.php");
@@ -297,8 +309,14 @@ include_once("connection.php");
     if ($page == "manage_account") {
       include_once("manage_account.php");
     }
-    if ($page == "add_contribution") {
+    if ($page == "addcontri") {
       include_once("add_contribution.php");
+    }
+    if ($page == "update_account") {
+      include_once("update_account.php");
+    }
+    if ($page == "interact") {
+      include_once("interact_faculty.php");
     }
   } else {
     include_once("content.php");

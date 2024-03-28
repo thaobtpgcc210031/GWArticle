@@ -1,5 +1,5 @@
 <?php
-    $conn = mysqli_connect('localhost', 'root', '', 'comp1640')
+    $conn = mysqli_connect('localhost', 'root', '', 'comp')
                            or die("Cannot connect database".mysqli_connect_error());
        
                             

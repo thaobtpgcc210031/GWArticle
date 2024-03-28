@@ -156,7 +156,7 @@ if(isset($_GET["id"])){
             </div>
             <div class="right-panel">
                 <div class="pdf-link">
-                    <a href="path_to_your_pdf_file.pdf" target="_blank">Download PDF</a>
+                    <a href="download.php?file=example.pdf" target="_blank">Download PDF</a>
                 </div>
             </div>
         </div>
