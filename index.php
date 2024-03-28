@@ -10,7 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+  <link rel="icon" href="./Icon/icon.ico" type="image/x-icon">
   <title>GW Magazine - Welcome</title>
 </head>
 <style>
@@ -154,6 +154,13 @@ include_once("connection.php");
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="?page=article" style="font-weight: bold;">Article</a></li>
                   <li><a class="dropdown-item" href="?page=manage_account" style="font-weight: bold;">Account</a></li>
+
+                  <li><a class="dropdown-item" href="?page=faculty" style="font-weight: bold;">Faculty</a></li>
+
+                  <li><a class="dropdown-item" href="?page=feedback_manage" style="font-weight: bold;">Manage Feedback</a></li>
+
+
+
                   <li><a class="dropdown-item" href="?page=show" style="font-weight: bold;">All..</a></li>
   
                 </ul>
@@ -317,6 +324,7 @@ include_once("connection.php");
     }
     if ($page == "interact") {
       include_once("interact_faculty.php");
+
     }
   } else {
     include_once("content.php");

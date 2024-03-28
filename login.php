@@ -2,6 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./Css/style.css">
+<link rel="icon" href="./Icon/icon.ico" type="image/x-icon">
 <title> GW | Login</title>
 </head>
 <?php
@@ -48,7 +49,7 @@ if(isset($_POST['btnLogin'])){
       <div class="form">
         <div class="login">
           <div class="login-header">
-            <h3>WELCOM</h3>
+            <h3>WELCOME</h3>
           </div>
         </div>
         <form class="login-form" method="POST">
