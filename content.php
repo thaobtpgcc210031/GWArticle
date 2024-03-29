@@ -102,9 +102,8 @@
         $offset = ($current_page > 1) ? ($current_page - 1) * $per_page : 0;
 
         // Truy vấn dữ liệu từ database
-        $sql = "SELECT magazine.*, contributions.ImgCv, contributions.title 
-        FROM magazine 
-        LEFT JOIN contributions ON magazine.ContributionID = contributions.ContributionID 
+        $sql = "SELECT *
+        FROM contributions 
         LIMIT $offset, $per_page";
 
         $result = mysqli_query($conn, $sql);
@@ -128,7 +127,7 @@
                 echo "</a>";
             }
         } else {
-            echo "Không có bài báo nào.";
+            echo "No contribution";
         }
         
 

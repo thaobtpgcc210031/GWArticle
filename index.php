@@ -140,9 +140,11 @@ include_once("connection.php");
               </a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="?page=submit" style="font-weight: bold;">View Contribution</a></li>
-                <li><a class="dropdown-item" href="?page=polo" style="font-weight: bold;">Social</a></li>
-                <li><a class="dropdown-item" href="?page=show" style="font-weight: bold;">All..</a></li>
+                <!-- <li><a class="dropdown-item" href="?page=polo" style="font-weight: bold;">Social</a></li>
+                <li><a class="dropdown-item" href="?page=show" style="font-weight: bold;">All..</a></li> -->
+                <li><a class="dropdown-item" href="?page=manage_feedback" style="font-weight: bold;">Manage Feedback</a></li>
               </ul>
+             
             </li>
           <?php
           }  elseif (isset($_SESSION['role']) && $_SESSION['role'] == 4) {
@@ -280,6 +282,9 @@ include_once("connection.php");
     if ($page == "add_article") {
       include_once("add_article.php");
     }
+    if ($page == "add_account") {
+      include_once("add_account.php");
+    }
     if ($page == "update_article") {
       include_once("update_article.php");
     }
@@ -324,20 +329,29 @@ include_once("connection.php");
     }
     if ($page == "interact") {
       include_once("interact_faculty.php");
-
+    }
+    if($page == "faculty"){
+      include_once("faculty_management.php");
+    }
+    if($page == "add_faculty"){
+      include_once("add_faculty.php");
+    }
+    if($page == "update_faculty"){
+      include_once("update_faculty.php");
+    }
+    if($page == "sendMail"){
+      include_once("sendMail.php");
+    }
+    if($page == "manage_feedback"){
+      include_once("manage_feedback.php");
     }
   } else {
     include_once("content.php");
   }
-
-
-
   ?>
-
   <footer class="text-center text-lg-start bg-white text-muted">
     <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
     </section>
-
     <section class="">
       <div class="container text-center text-md-start mt-5">
         <!-- Grid row -->
@@ -350,9 +364,7 @@ include_once("connection.php");
             </h6>
             <p>
               This is a page to show some article about eduction of schoole
-
           </div>
-
           <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
             <h6 class="text-uppercase fw-bold mb-4">
               Article
@@ -364,7 +376,6 @@ include_once("connection.php");
               <a href="#!" class="text-reset" style="text-decoration: none;">Social</a>
             </p>
           </div>
-
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
             <h6 class="text-uppercase fw-bold mb-4">
               Useful

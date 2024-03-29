@@ -208,15 +208,14 @@ function bind_Department($conn){
 
 
       }else{
-        $passmd5 = md5($pass);
         $sq="Select * from magazine where MagazineID = '$id' and ContentM = '$conte'";
             $result= mysqli_query($conn, $sq);
             if(mysqli_num_rows($result)==0){
-              $sqlstring="UPDATE users set Email='$mail', fullName='$fName', Password='$passmd5',
+              $sqlstring="UPDATE users set Email='$mail', fullName='$fName', Password='$pass',
                     Address='$addr', Phone='$phone',Role='$role',Depart='$department'
                      WHERE UserID='$id'";
                     mysqli_query($conn, $sqlstring);
-                    echo'<meta http-equiv="refresh" content="0;URL=index.php?page=article"/>';
+                    echo'<meta http-equiv="refresh" content="0;URL=index.php?page=manage_account"/>';
             }else{
               echo "<li>....</li>";
             }

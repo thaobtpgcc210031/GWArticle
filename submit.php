@@ -1,5 +1,23 @@
 <link rel="stylesheet" href="./Css/cate.css" />
 <meta charset="utf-8" />
+<style>
+/* Add these styles to your cate.css file */
+.status-approve {
+    color: green; /* Màu chữ xanh cho trạng thái approved */
+    font-weight: bold; /* In đậm chữ */
+}
+
+.status-reject {
+    color: red; /* Màu chữ đỏ cho trạng thái rejected */
+    font-weight: bold; /* In đậm chữ */
+}
+
+.status-default {
+    color: inherit; /* Màu chữ mặc định */
+    font-weight: normal; /* Không in đậm chữ */
+}
+
+</style>
 <script language="javascript">
     function deleteConfirm() {
         if (confirm("Are you sure to delete!")) {
@@ -75,9 +93,11 @@ if (isset($_GET["function"]) && $_GET["function"] == "del") {
                         <a href="?page=interact&&id=<?php echo $row["ContributionID"]; ?>" style="color: green; text-decoration: none;">
                             &#9998;</a>
                     </td>
-                    <td style='text-align:center'>
-                        <a href="submit.php?function=del&&id=<?php echo $row["ContributionID"]; ?>" style="color: red; text-decoration: none;" onclick="return deleteConfirm()">&#10006;</a>
-                    </td>
+                    <td style="text-align: center;">
+    <span class="<?php echo strtolower($row["Status"]) === 'approve' ? 'status-approve' : (strtolower($row["Status"]) === 'reject' ? 'status-reject' : 'status-default'); ?>">
+        <?php echo $row["Status"]; ?>
+    </span>
+</td>
 
                 </tr>
             <?php

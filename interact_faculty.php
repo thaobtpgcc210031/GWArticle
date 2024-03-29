@@ -76,45 +76,47 @@
         .download-btn:hover {
             background-color: #45a049;
         }
+
         .dropdown {
-        position: relative;
-        display: inline-block;
-    }
+            position: relative;
+            display: inline-block;
+        }
 
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #f9f9f9;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-    }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
 
-    .dropdown-content a {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-    }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
 
-    .dropdown-content a:hover {
-        background-color: #f1f1f1;
-    }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
 
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
 
-    .dropdown:hover .dropbtn {
-        background-color: #3e8e41;
-    }
-    .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px; /* Adjust margin as needed */
-}
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
 
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            /* Adjust margin as needed */
+        }
     </style>
 </head>
 <?php
@@ -155,94 +157,105 @@ if (isset($_GET['id'])) {
 
 <body>
     <form method="POST">
-    <input type="hidden" id="selectedStatusInput" name="selectedStatus" value="<?php echo htmlspecialchars($status); ?>">
-    <!-- Các phần còn lại của form -->
-    <div class="container">
-    <div class="left-panel">
-        <!-- H2 và nút download cùng một dòng -->
-        <div class="header">
-            <h2 style="display: inline;">Contributions</h2>
-            <a class="download-btn" href="<?php echo $pdfLink; ?>" download style="display: inline; float: right;">Download PDF</a>
-        </div>
-        <!-- Thông tin từ bảng contributions -->
-        <p><strong>Title:</strong> <?php echo $title; ?></p>
-        <p><strong>Content:</strong> <?php echo $content; ?></p>
-        <p><strong>File:</strong> <?php echo $fileP; ?></p>
-        <p><strong>Content:</strong> <?php echo $content; ?></p>
-        <div class="dropdown">
-            <?php if(empty($status)){?>
-                <button class="dropbtn" id="selectedStatus" name="selectedStatus">Status</button>
-                <div class="dropdown-content">
-                    <a href="#" onclick="changeStatus('Approve')">Approve</a>
-                    <a href="#" onclick="changeStatus('Reject')">Reject</a>
+        <input type="hidden" id="selectedStatusInput" name="selectedStatus" value="<?php echo htmlspecialchars($status); ?>">
+        <!-- Các phần còn lại của form -->
+        <div class="container">
+            <div class="left-panel">
+                <!-- H2 và nút download cùng một dòng -->
+                <div class="header">
+                    <h2 style="display: inline;">Contributions</h2>
+                    <a class="download-btn" href="<?php echo $pdfLink; ?>" download style="display: inline; float: right;">Download PDF</a>
                 </div>
-            <?php }else{?>
-                <button class="dropbtn" id="selectedStatus" name="selectedStatus"><?php echo $status; ?></button>
-                <div class="dropdown-content">
-                    <a href="#" value="1" onclick="changeStatus('Approve')">Approve</a>
-                    <a href="#" value="2" onclick="changeStatus('Reject')">Reject</a>
+                <!-- Thông tin từ bảng contributions -->
+                <p><strong>Title:</strong> <?php echo $title; ?></p>
+                <p><strong>Content:</strong> <?php echo $content; ?></p>
+                <p><strong>File:</strong> <?php echo $fileP; ?></p>
+                <p><strong>Content:</strong> <?php echo $content; ?></p>
+                <div class="dropdown">
+                    <?php if (empty($status)) { ?>
+                        <button class="dropbtn" id="selectedStatus" name="selectedStatus">Status</button>
+                        <div class="dropdown-content">
+                            <a href="#" onclick="changeStatus('Approve')">Approve</a>
+                            <a href="#" onclick="changeStatus('Reject')">Reject</a>
+                        </div>
+                    <?php } else { ?>
+                        <button class="dropbtn" id="selectedStatus" name="selectedStatus"><?php echo $status; ?></button>
+                        <div class="dropdown-content">
+                            <a href="#" value="1" onclick="changeStatus('Approve')">Approve</a>
+                            <a href="#" value="2" onclick="changeStatus('Reject')">Reject</a>
+                        </div>
+                    <?php } ?>
                 </div>
-            <?php } ?>
-        </div>
-        <button type="submit" name="btnUpdateSta" id="btnUpdateSta" value="UpdateStatus">Update</button>
-    </div>
-        <div class="right-panel">
-            <!-- Khung chat -->
-            <h2>Chat</h2>
-            <div class="chat-box">
-                <!-- Tin nhắn chat sẽ được thêm bằng mã PHP -->
-                <div class="chat-message">
-                    <span class="sender">John:</span>
-                    <span class="message-body">Hi there!</span>
-                </div>
-                <div class="chat-message">
-                    <span class="sender">Jane:</span>
-                    <span class="message-body">Hello!</span>
-                </div>
-                <!-- Tin nhắn sẽ tự động cuộn xuống dưới cùng -->
+                <button type="submit" name="btnUpdateSta" id="btnUpdateSta" value="UpdateStatus">Update</button>
             </div>
-            <!-- Form để gửi tin nhắn mới -->
-            <form action="#" method="post">
-                <input type="text" name="message" placeholder="Type here...">
-                <button type="submit">Send</button>
-            </form>
+            <div class="right-panel">
+                <!-- Khung chat -->
+                <h2>Chat</h2>
+                <?php
+
+                // Xử lý gửi tin nhắn mới
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    if (isset($_POST['message']) && !empty($_POST['message'])) {
+                        $message = $_POST['message'];
+                        $sender = $_SESSION['UserID']; // Giả sử thông tin user được lưu trong session
+                        $department = $_SESSION['Department']; // Giả sử thông tin department được lưu trong session
+
+                        // Kiểm tra xem người dùng có quyền gửi tin nhắn không
+                        $check_query = "SELECT * FROM interact WHERE UserID = '$sender' AND Department = '$department'";
+                        $result = $conn->query($check_query);
+
+                        if ($result->num_rows > 0) {
+                            // Thêm tin nhắn mới vào cơ sở dữ liệu
+                            $sql = "INSERT INTO interact (UserID, Department, Chat) VALUES ('$sender', '$department', '$message')";
+                            $conn->query($sql);
+                        } else {
+                            echo "Bạn không có quyền gửi tin nhắn trong phòng ban này.";
+                        }
+                    }
+                }
+
+
+                ?>
+                <!-- Form để gửi tin nhắn mới -->
+                <form action="#" method="post">
+                    <input type="text" name="message" placeholder="Type here...">
+                    <button type="submit">Send</button>
+                </form>
+            </div>
         </div>
-    </div>
     </form>
 </body>
 
 <?php
-  if(isset($_POST["btnUpdateSta"])){
-	$status = $_POST["selectedStatus"];
+if (isset($_POST["btnUpdateSta"])) {
+    $status = $_POST["selectedStatus"];
 
 
-    $err="";
-    if(trim($contributionID)==""){
-      $err .= "<li>Status update failed.1</li>";
-      }else{
-        $sq="Select * from contributions where ContributionID = '$contributionID'";
-            $result= mysqli_query($conn, $sq);
-            if(mysqli_num_rows($result)==1){
-              $sqlstring="UPDATE contributions set Status='$status'
+    $err = "";
+    if (trim($contributionID) == "") {
+        $err .= "<li>Status update failed.1</li>";
+    } else {
+        $sq = "Select * from contributions where ContributionID = '$contributionID'";
+        $result = mysqli_query($conn, $sq);
+        if (mysqli_num_rows($result) == 1) {
+            $sqlstring = "UPDATE contributions set Status='$status'
                      WHERE ContributionID='$contributionID'";
-                    mysqli_query($conn, $sqlstring);
+            mysqli_query($conn, $sqlstring);
             echo '<script>window.location.href = "index.php?page=interact&id=' . $contributionID . '";</script>';
-                    echo "Success";
-            }else{
-              echo "<li>Status update failed.2</li>";
-            }
-          }
-      }
-else{
-  //echo '<meta http-equiv="refresh" content="0;URL=index.php?page=manage_account"/>';
+            echo "Success";
+        } else {
+            echo "<li>Status update failed.2</li>";
+        }
+    }
+} else {
+    //echo '<meta http-equiv="refresh" content="0;URL=index.php?page=manage_account"/>';
 }
 ?>
 
 </html>
 <script>
-function changeStatus(status) {
-    document.getElementById('selectedStatus').innerText = status;
-    document.getElementById('selectedStatusInput').value = status;
-}
-
+    function changeStatus(status) {
+        document.getElementById('selectedStatus').innerText = status;
+        document.getElementById('selectedStatusInput').value = status;
+    }
 </script>

@@ -30,8 +30,7 @@
 <table style="width:100%">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Contribution</th>
+        <th>Contribution title</th>
         <th>Academic Year</th>
         <th>Public Date</th>
         <th>Content</th>
@@ -45,18 +44,19 @@
             <?php
                 include_once("connection.php");
                 $No=1;
-                $result = mysqli_query($conn, "SELECT * FROM magazine");
+                $result = mysqli_query($conn, "SELECT MagazineID, ContributionID, AcaYear, ContentM, PublicationDate, Closuredate ,FinalClosuredate 
+                FROM  closure a, magazine b
+                WHERE a.idC = b.idC ORDER BY PublicationDate DESC");
                 while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
             ?>
+            
 			<tr>
-
-              <td style="text-align: center;"><?php echo $row["MagazineID"];?></td>
               <td style="text-align: center;"><?php echo $row["ContributionID"];?></td>
               <td style="text-align: center;"><?php echo $row["AcaYear"];?></td>
               <td style="text-align: center;"><?php echo $row["PublicationDate"];?></td>
               <td style="text-align: center;"><?php echo $row["ContentM"];?></td>
-              <td style="text-align: center;"><?php echo $row["ClosureDate"];?></td>
-              <td style="text-align: center;"><?php echo $row["FinalClosureDate"];?></td>
+              <td style="text-align: center;"><?php echo $row["Closuredate"];?></td>
+              <td style="text-align: center;"><?php echo $row["FinalClosuredate"];?></td>
               <td style='text-align:center'>
               <a href="?page=update_article&&id=<?php echo $row["MagazineID"]; ?>" style="color: green; text-decoration: none;">
               &#9998;</a></td>

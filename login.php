@@ -31,10 +31,12 @@ if(isset($_POST['btnLogin'])){
     
 		if(mysqli_num_rows($res)==1){
       $Role = $row['Role'];
+      $id = $row['UserID'];
       $name = $row['fullName'];
       $_SESSION["role"] = $Role;
       $_SESSION["fullName"] = $name;
 			$_SESSION["us"] = $us;
+      $_SESSION["id"] = $id;
       echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';
 		}else{
 			echo "You loged fail";

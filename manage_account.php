@@ -14,8 +14,8 @@
     if(isset($_GET["function"])=="del"){
         if(isset($_GET["id"])){
             $id = $_GET["id"];
-            mysqli_query($conn, "DELETE FROM magazine WHERE MagazineID='$id'");
-            echo '<meta http-equiv="refresh" content="0;URL=index.php?page=article"/>';
+            mysqli_query($conn, "DELETE FROM users WHERE UserID='$id'");
+            echo '<meta http-equiv="refresh" content="0;URL=index.php?page=manage_account"/>';
         }
     }
     ?>
@@ -23,7 +23,7 @@
 <div class="container1">
     <p>ACCOUNT MANAGERMENT</p>
 <div>
-<a href="?page=add_article"><button class="button" style="vertical-align:middle"><span>ADD </span></button></a>
+<a href="?page=add_account"><button class="button" style="vertical-align:middle"><span>ADD </span></button></a>
 <a href="?page=back"><button class="button" style="vertical-align:middle"><span>BACK &#10148; </span></button></a>
 
 </div>
@@ -59,7 +59,7 @@
               <a href="?page=update_account&&id=<?php echo $row["UserID"]; ?>" style="color: green; text-decoration: none;">
               &#9998;</a></td>
               <td style='text-align:center'>
-              <a href="article.php?function=del&&id=<?php echo $row["UserID"];?>" style="color: red; text-decoration: none;" 
+              <a href="manage_account.php?function=del&&id=<?php echo $row["UserID"];?>" style="color: red; text-decoration: none;" 
               onclick="return deleteConfirm()">&#10006;</a></td>
               
             </tr>

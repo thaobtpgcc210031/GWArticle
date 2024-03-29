@@ -51,7 +51,7 @@ if (isset($_POST["btnAdd"])) {
             $sqlstring = "INSERT INTO contributions (Title, ContentP, StudentID, SubmissionDate, FileP, ImgCV, ImgSample)
                           VALUES ('$title', '$content', '$id', '$currentDateTime', '$fileC', '$fileCv', '$filespl')";
             mysqli_query($conn, $sqlstring);
-            echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';
+            echo '<meta http-equiv="refresh" content="0;URL=sendMail.php"/>';
         } else {
             echo "Error uploading file!";
         }
@@ -113,7 +113,7 @@ if (isset($_POST["btnAdd"])) {
                 <br>
                 <div class="row">
                     <input type="submit" name="btnAdd" id="btnAdd" value="ADD">
-                    <a href="?page=product" class="btn_back"><span>Back &#10148; </span></a>
+                    <a href="?page=back" class="btn_back"><span>Back &#10148; </span></a>
                 </div>
 
             </form>

@@ -1,78 +1,85 @@
-<link rel="stylesheet" href="./Css/addform.css">
-
 <?php
-	include_once("connection.php");
-	if(isset($_POST["btnAdd"]))
-	{
-		$id = $_POST["txtID"];
-		$name = $_POST["txtName"];
-		$des = $_POST["txtDes"];
-		$err="";
-		if($id==""){
-			$err.="<li>Enter ID</li>";
-		}
-		if($name==""){
-			$err.="<li>Enter Name<li>";
-		}
-		if($err!=""){
-			echo "<ul>$err</ul>";
-		}else{
-			$id = htmlspecialchars(mysqli_real_escape_string($conn,$id));
-			$name = htmlspecialchars(mysqli_real_escape_string($conn,$name));
-			$des = htmlspecialchars(mysqli_real_escape_string($conn,$des));
-			$sq="SELECT * FROM category where Cat_ID='$id' or Cat_Name='$name'";
-			$result = mysqli_query($conn,$sq);
-			if(mysqli_num_rows($result)==0){
-				mysqli_query($conn, "INSERT INTO category (Cat_ID, Cat_Name, Cat_Des)
-				VALUES ('$id','$name','$des')");
-				echo '<meta http-equiv="refresh" content="0;URL=index.php?page=feedback"/>';
-			}else{
-				echo "<li>Duplicate catgory ID or Name</li>";
-			}
-		}
-	}
-	?>
+// Bao gồm file kết nối
+include_once("connection.php");
+function bind_Contribution($conn)
+{
+  $sqlstring = "SELECT ContributionID, Title FROM contributions";
+  $result = mysqli_query($conn, $sqlstring);
+  echo "<select name='contributionID'>
+            <option value ='0'>choose contributions</option>";
+  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+    echo "<option value='" . $row['ContributionID'] . "'>" . $row['Title'] . "</option>";
+  }
+  echo "</select>";
+}
+
+function bind_User($conn)
+{
+  $sqlstring = "SELECT UserID FROM users";
+  $result = mysqli_query($conn, $sqlstring);
+  echo "<select name='userID'>
+            <option value ='0'>choose user</option>";
+  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+    echo "<option value='" . $row['UserID'] . "'>" . $row['UserID'] . "</option>";
+  }
+  echo "</select>";
+}
 
 
-<br>
-<div class="container1">
-<div>
-    <p style="margin-bottom: 10px; margin-left: 20px;">ADD FEEDBACK</p>
-<div>
-  <form action="" method="POST">
-  <div class="row">
-    <div class="col-25">
-      <label for="fname">ID FEEDBACK</label>
+
+// Xử lý dữ liệu khi người dùng gửi form
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Kiểm tra và lấy dữ liệu từ form
+  $contributionID = $_POST["contributionID"];
+  $comment = $_POST["comment"];
+  $userID = $_POST["userID"];
+
+  // Chuẩn bị câu lệnh SQL để chèn dữ liệu vào bảng comments
+  $sql = "INSERT INTO comments (ContributionID, Comment, UserID) VALUES ('$contributionID', '$comment', '$userID')";
+
+  // Thực thi câu lệnh SQL
+  if (mysqli_query($conn, $sql)) {
+    // Chuyển hướng người dùng sau khi thêm thành công
+    header("Location: manage_feedback.php");
+    exit();
+  } else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+  }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Feedback</title>
+</head>
+
+<body>
+  <h2>Add Feedback</h2>
+
+  <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <div class="row">
+      <label for="" class="col-25">Contribution </label>
+      <div class="col-75">
+        <?php bind_Contribution($conn); ?>
+      </div>
     </div>
-    <div class="col-75">
-      <input type="text" id="txtID" name="txtID" placeholder="">
+
+    <label for="comment">Comment:</label><br>
+    <textarea id="comment" name="comment" rows="4" cols="50" required></textarea><br><br>
+
+    <div class="row">
+      <label for="" class="col-25">User ID </label>
+      <div class="col-75">
+        <?php bind_User($conn); ?>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <label for="lname">FEEDBACK</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="txtName" name="txtName" placeholder="">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <label for="lname">DATE</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="txtDes" name="txtDes" placeholder="">
-    </div>
-  </div>
-  
-  
-  <br>
-  <div class="row">
-    <input type="submit" name="btnAdd" id="btnAdd" value="ADD">
-    <a href="?page=feedback" class="btn_back"><span>Back &#10148; </span></a>
-  </div>
- 
+
+    <input type="submit" value="Submit">
   </form>
-</div>
-</div>
-</div>
+</body>
+
+</html>
