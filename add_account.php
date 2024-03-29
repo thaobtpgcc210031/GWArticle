@@ -25,7 +25,7 @@ function bind_Department($conn){
   echo "</select>";
 }
 
-if(isset($_POST['btnRegister'])){	
+if(isset($_POST['btnAddAccount'])){	
 	$us = $_POST['txtUsername'];
 	$pass1 = $_POST['txtPass1'];
 	$pass2 = $_POST['txtPass2'];
@@ -34,6 +34,7 @@ if(isset($_POST['btnRegister'])){
 	$tele = $_POST['txtPhone'];
 	$address = $_POST['txtAddress'];	
   $department = $_POST['Department'];
+  $role = $_POST['Roles'];
   
 	$err = "";
 
@@ -61,8 +62,8 @@ if(isset($_POST['btnRegister'])){
         $res = mysqli_query($conn,$sq);
         if(mysqli_num_rows($res)==0){
             mysqli_query($conn, "
-                                INSERT INTO users(`Username`, `Password`, `Email`, `Depart`, `FullName`, `Address`, `Phone`) 
-                                VALUES ('$us','$pass' ,'$email','$department','$fullname','$address','$tele')") or die(mysqli_error($conn));
+                                INSERT INTO users(`Username`, `Password`, `Email`, `Depart`,`Role`, `FullName`, `Address`, `Phone`) 
+                                VALUES ('$us','$pass' ,'$email','$department','$role','$fullname','$address','$tele')") or die(mysqli_error($conn));
                                 echo "You have registered successfully";
         }else{
 		      echo "Username or email already exists";
@@ -75,7 +76,7 @@ if(isset($_POST['btnRegister'])){
 <br>
 <div class="container1">
 <div>
-    <p style="margin-bottom: 10px; margin-left: 20px;">ADD FEEDBACK</p>
+    <p style="margin-bottom: 10px; margin-left: 20px; font-weight:bold;">Add New Account</p>
 <div>
   <form action="" method="POST">
   <div class="row">
@@ -88,26 +89,74 @@ if(isset($_POST['btnRegister'])){
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="lname">FEEDBACK</label>
+      <label for="lname">Password</label>
     </div>
     <div class="col-75">
-      <input type="text" id="txtName" name="txtName" placeholder="">
+      <input type="password" name="txtPass1" id="txtPass1" placeholder="Password"/>
     </div>
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="lname">DATE</label>
+      <label for="lname">Confirm Password</label>
     </div>
     <div class="col-75">
-      <input type="text" id="txtDes" name="txtDes" placeholder="">
+      <input type="password" name="txtPass2" id="txtPass2" placeholder="Confirm password"/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="lname">Full Name</label>
+    </div>
+    <div class="col-75">
+      <input type="text" name="txtName" id="txtName" placeholder="Full name"/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="lname">Email</label>
+    </div>
+    <div class="col-75">
+      <input type="text" name="txtEmail" id="txtEmail" placeholder="Email"/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="lname">Phone Number</label>
+    </div>
+    <div class="col-75">
+      <input type="text" name="txtPhone" id="txtPhone" placeholder="Phone number"/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="lname">Address</label>
+    </div>
+    <div class="col-75">
+      <input type="text" name="txtAddress" id="txtAddress" placeholder="Address"/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="lname">Department</label>
+    </div>
+    <div class="col-75">
+      <div class="dropdown"><?php bind_Department($conn) ?></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="lname">Department</label>
+    </div>
+    <div class="col-75">
+      <div class="dropdown"><?php bind_Role($conn) ?></div>
     </div>
   </div>
   
   
   <br>
   <div class="row">
-    <input type="submit" name="btnAdd" id="btnAdd" value="ADD">
-    <a href="?page=feedback" class="btn_back"><span>Back &#10148; </span></a>
+    <input type="submit" name="btnAddAccount" id="btnAddAccount" value="ADD">
+    <a href="?page=manage_account" class="btn_back"><span>Back &#10148; </span></a>
   </div>
  
   </form>
