@@ -32,6 +32,7 @@ if(isset($_POST['btnRegister'])){
 	$tele = $_POST['txtPhone'];
 	$address = $_POST['txtAddress'];	
   $department = $_POST['Department'];
+  $role = $_POST['Roles'];
   
 	$err = "";
 
@@ -59,8 +60,8 @@ if(isset($_POST['btnRegister'])){
         $res = mysqli_query($conn,$sq);
         if(mysqli_num_rows($res)==0){
             mysqli_query($conn, "
-                                INSERT INTO users(`Username`, `Password`, `Email`, `Depart`, `FullName`, `Address`, `Phone`) 
-                                VALUES ('$us','$pass' ,'$email','$department','$fullname','$address','$tele')") or die(mysqli_error($conn));
+                                INSERT INTO users(`Username`, `Password`, `Email`, `Depart`, `Role`, `FullName`, `Address`, `Phone`) 
+                                VALUES ('$us','$pass' ,'$email','$department','$role','$fullname','$address','$tele')") or die(mysqli_error($conn));
                                 echo "You have registered successfully";
         }else{
 		      echo "Username or email already exists";
@@ -116,6 +117,7 @@ select{
         <input type="text" name="txtPhone" id="txtPhone" placeholder="Phone number"/>
         <input type="text" name="txtAddress" id="txtAddress" placeholder="Address"/>
         <div class="dropdown"><?php bind_Department($conn) ?></div>
+        <div class="dropdown"><?php bind_Role($conn) ?></div>
         <button type="submit" name="btnRegister" id="btnRegister" value="Register">REGISTER</button>
         <p class="message">Already have an account! <a href="login.php">LOGIN</a></p>
       </form>

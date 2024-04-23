@@ -5,43 +5,114 @@
 <link rel="stylesheet" href="./Css/contentmiddle.css">
 <style>
   
-    @import url('https://fonts.googleapis.com/css2?family=Satisfy&family=Space+Mono&display=swap');  .more-link{
-    padding: 5px;
-    font-weight: bold;
-    font-size: large;    
-  }
-  .more-link:hover{
-    text-shadow: 1px 1px 2px white, 0 0 1em grey, 0 0 0.2em grey;
-  }
-  .bttm-content{
-    font-family: 'Space Mono', monospace;
-    color: #e6e6e6;
-    padding-top: 200px;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    font-style: italic;
-    position: absolute;
-  }
-  .fa {
-    padding: 25px;
-    font-size: 30px;
-    width: 85px;
-    text-align: center;
-    text-decoration: none;
-    color: white;
-  }
-  .fa:hover {
-    background-color: #e6e6e6;
-    color: black;
-    border-radius: 75px;
-  }
-  .search-container {
-    float: right;
-    display:flex;
-    margin-left: 100%;
+  /* Reset some default styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
 
-  }
+/* Style for the section containing the slider */
+section {
+    margin-top: 20px;
+}
+
+/* Style for the search form */
+form {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.search-container {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+#searchInput {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+#search-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Style for the container of articles */
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.article-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+}
+
+.article {
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+}
+
+.article:hover {
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+}
+
+.article h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.article p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Style for pagination */
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+.pagination a:hover {
+    background-color: #f2f2f2;
+}
+
+.pagination .current {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+    border-radius: 4px;
+    padding: 8px 16px;
+    margin-right: 5px;
+}
+
+  
 </style>
 
 
@@ -63,7 +134,8 @@
                 $searching = $_POST['searching'];
               }
               ?>
-
+</form>
+<br>
 <style>
     .container {
         width: 80%;
@@ -111,28 +183,31 @@
         // Hiển thị dữ liệu
         if ($result && mysqli_num_rows($result) > 0) { // Thêm kiểm tra $result
             while ($row = mysqli_fetch_assoc($result)) {
-                echo "<a href='?page=detail_article&&id=" . $row['MagazineID'] . "' class='article'>";
-                echo "<h2>" . $row['MagazineID'] . "</h2>";
-                echo "<p>" . $row['ContentM'] . "</p>";
+                echo "<a href='?page=detail_article&&id=" . $row['ContributionID'] . "' class='article'>";
+                echo "<h2>" . $row['ContributionID'] . "</h2>";
+                echo "<p>" . $row['Title'] . "</p>";
                 // Hiển thị tên hình ảnh nếu có
                 if ($row['ImgCv']) {
-                    echo "<p>Tên hình ảnh: " . $row['ImgCv'] . "</p>";
+                    echo '<img style="width:100px; height:100px" src="./Img/' . $row["ImgCv"] . '" alt="Image">';
+                    
                 } else {
-                    echo "<p>Không có hình ảnh.</p>";
+                    echo "<p>No Image.</p>";
                 }
                 // Hiển thị tiêu đề nếu có
-                if ($row['title']) {
-                    echo "<p>Tiêu đề: " . $row['title'] . "</p>";
+                if ($row['ContentP']) {
+                    echo "<p>Content: " . $row['ContentP'] . "</p>";
                 }
                 echo "</a>";
             }
         } else {
             echo "No contribution";
         }
-        
+        ?>
+        </div>
+        <?php
 
         // Truy vấn số lượng bài báo
-        $sql_total = "SELECT COUNT(*) AS total FROM magazine";
+        $sql_total = "SELECT COUNT(*) AS total FROM contributions";
         $result_total = mysqli_query($conn, $sql_total);
         $row_total = mysqli_fetch_assoc($result_total);
         $total_articles = $row_total['total'];
@@ -141,7 +216,7 @@
         $total_pages = ceil($total_articles / $per_page);
 
         // Hiển thị các liên kết phân trang
-        echo "<div class='pagination'>";
+        echo "<br><div class='pagination'>";
         if ($current_page > 1) {
             echo "<a href='index.php?page=show&page_number=1'>First</a>";
         }
@@ -158,7 +233,7 @@
         echo "</div>";
 
         ?>
-    </div>
+
 </div>
 
 <script src="./OwlCarousel/docs/assets/vendors/jquery.min.js"></script>

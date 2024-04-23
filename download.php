@@ -1,25 +1,34 @@
 <?php
-include_once("connection.php");
+// Check if the file parameter is set in the URL
+if(isset($_GET['file'])) {
+    // Get the file name from the URL
+    $file = $_GET['file'];
+    
+    // Set the path to the file
+    $filepath = './uploads' . $file;
 
-$sql = "SELECT FileP FROM contributions ORDER BY ContributionID DESC LIMIT 1";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    // Output data of the last uploaded image
-    $row = $result->fetch_assoc();
-    $file = $row["FileP"];
-
-    // Send the appropriate headers for image download
-    header("Content-Disposition: attachment; filename=" . basename($file));
-    header("Content-Type: application/octet-stream");
-    header("Content-Length: " . filesize($file));
-
-    // Output the image content
-    readfile($file);
+    // Check if the file exists
+    if(file_exists($filepath)) {
+        // Set appropriate headers for file download
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=' . basename($filepath));
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($filepath));
+        ob_clean();
+        flush();
+        
+        // Read the file and output it to the browser
+        readfile($filepath);
+        exit;
+    } else {
+        // If the file doesn't exist, display an error message
+        echo 'File not found.';
+    }
 } else {
-    echo "Image not found.";
+    // If the file parameter is not set in the URL, display an error message
+    echo 'Invalid request.';
 }
-
-// Close database connection
-$conn->close();
 ?>

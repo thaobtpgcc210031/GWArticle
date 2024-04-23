@@ -1,5 +1,81 @@
+<style>
+
+
+    /* Reset some default styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container1 {
+    margin: 20px auto;
+    width: 80%;
+}
+
+p {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+thead th {
+    text-align: center;
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px;
+}
+
+tbody td {
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+}
+
+tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    color: #4CAF50;
+}
+
+</style>
+
 <link rel="stylesheet" href="./Css/cate.css"/>
 	<meta charset="utf-8" />
+    <style>
+  thead th {
+    text-align: center; /* căn giữa nội dung của các thẻ th */
+  }
+</style>
     <script langguae="javascript">
         function deleteConfirm(){
             if(confirm("Are you sure to delete!")){
@@ -30,7 +106,6 @@
 <table style="width:100%">
     <thead>
       <tr>
-        <th>Department ID</th>
         <th>Department Name</th>
         <th>Description</th>
         <th>Edit</th>
@@ -45,8 +120,6 @@
                 while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
             ?>
 			<tr>
-
-              <td style="text-align: center;"><?php echo $row["departmentID"];?></td>
               <td style="text-align: center;"><?php echo $row["departmentName"];?></td>
               <td style="text-align: center;"><?php echo $row["DeDes"];?></td>
               <td style='text-align:center'>

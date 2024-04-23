@@ -1,125 +1,97 @@
 <?php
 include_once("connection.php");
+    //get data from db
+    $query = " SELECT * From users where Username = '" .$_SESSION["us"]. "'";
+    $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
+    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
-function bind_Role($conn){
-  $sqlstring = "SELECT * FROM roles";
-  $result = mysqli_query($conn, $sqlstring);
-  echo "<select name='Roles'>
-      <option value ='0'>Choose Roles</option>";
-      while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-        echo "<option value='".$row['RoleID']."'>".$row['RoleName']."</option>";
-      }
-  echo "</select>";
-}
+    $us = $_SESSION["us"];
+    $name = $row["fullName"];
+    $mail = $row["Email"];
+    $tel = $row["Phone"];
+    $address = $row["Address"];
 
-function bind_Department($conn){
-  $sqlstring = "SELECT * FROM department";
-  $result = mysqli_query($conn, $sqlstring);
-  echo "<select name='Department'>
-      <option value ='0'>Choose Department</option>";
-      while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-        echo "<option value='".$row['departmentID']."'>".$row['departmentName']."</option>";
-      }
-  echo "</select>";
-}
 
-if(isset($_POST['btnRegister'])){	
-	$us = $_POST['txtUsername'];
-	$pass1 = $_POST['txtPass1'];
-	$pass2 = $_POST['txtPass2'];
-	$fullname = $_POST['txtName'];
-	$email = $_POST['txtEmail'];
-	$tele = $_POST['txtPhone'];
-	$address = $_POST['txtAddress'];	
-  $department = $_POST['Department'];
-  
-	$err = "";
+    //update
+    if(isset($_POST["btnUpdate"])){
+        $name = $_POST["txtName"];
+        $tel = $_POST["txtPhone"];
+        $address = $_POST["txtAdd"];
+        $mail = $_POST["txtMail"];
 
-	if($us==""||$pass1=="" ||$pass2==""||$fullname==""
-	||$email==""||$address==""||$tele==""||$department==""){
-		$err .="<li>Enter information fully, please</li>";
-	}
-	
-	if(strlen($pass1)<=5){ // Sửa lỗi về độ dài mật khẩu
-		$err .="<li>Password must be greater than 5 chars</li>";
-	}
-	
-	if($pass1 != $pass2){
-		$err .="<li>Password and confirm password do not match</li>"; // Sửa thông báo lỗi
-	}
-    
-
-	if($err != ""){
-		echo "<ul>".$err."</ul>"; // Sửa hiển thị thông báo lỗi
-	}
-	else{
-        
-        $pass = md5($pass1);
-        $sq = "SELECT * FROM users WHERE Username='$us' OR Email='$email'"; // Sửa lỗi so sánh email
-        $res = mysqli_query($conn,$sq);
-        if(mysqli_num_rows($res)==0){
-            mysqli_query($conn, "
-                                INSERT INTO users(`Username`, `Password`, `Email`, `Depart`, `FullName`, `Address`, `Phone`) 
-                                VALUES ('$us','$pass' ,'$email','$department','$fullname','$address','$tele')") or die(mysqli_error($conn));
-                                echo "You have registered successfully";
-        }else{
-		      echo "Username or email already exists";
+        $test = check();
+        if($test==""){
+            $sq = "UPDATE users SET fullName='$name' , Address='$address', Email='$mail',
+                            Phone='$tel' WHERE Username = '$us'";
+            mysqli_query($conn,$sq) or die(mysqli_error($conn));   
+            echo '<meta http-equiv="refresh" content="0;URL=index.php?page=home"/>';
+ 
+        }else{     
+           echo $test;     
         }
-	}
-}
+    }
+
+    function check(){
+        if($_POST['txtName']==""||$_POST['txtAdd']==""||$_POST['txtPhone']==""){
+            return "<li>Enter information fully</li>";
+        }else{
+            return "";
+        }
+    }
+
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="./Icon/icon.ico" type="image/x-icon">
-  <title>Register - Page</title>
-  <link rel="stylesheet" href="./Css/style.css">
-</head>
 <style>
-.dropdown{
-padding-right: 15px;
-padding-left: 0px;
-margin: 0 0 15px;
-width: 100%;
-font-size: 14px;
-
+.btn_back{
+    margin-top: 10px;
+    text-decoration: none; 
+    color:black; 
+    text-align:center;
 }
-select{
-  width: 100%;
-  padding: 15px;
-  padding-left: 10px;
-  background-color:#f2f2f2 ;
-  border: 0;
-  font-size: 14px;
-  color:#828282 ;
+.btn_back:hover{
+    text-shadow: 0px 1px 10px #000000;
+    color: rgb(0, 0, 0);
+}
+input.btnUpd{
+    font-weight: bold;
+    background-color: 	#3CB371	;
+}
+input.btnUpd:hover{
+    background-color: 	#90EE90;
+}
+.lblTitle{
+    font-weight: bold;
+    padding-bottom: 5px;
 }
 </style>
 
-<body>
-  <div class="login-page">
-    <div class="form">
-      <div class="login">
-        <div class="login-header">
-          <h3>CREATE YOUR ACCOUNT</h3>
+<div class="container">
+    <form action="" method="POST">
+        <div class="form">
+          <h2>ACOUNT</h2>
+        <div class="acinf" >
+            <label style="float: left;" for="" class="lblTitle"> User Name</label>
+            <input type="text" value=<?php echo $us?> readonly>
+         </div>
+        <div class="acinf">
+            <label style="float: left;" for=""class="lblTitle"> Full Name</label>
+            <input type="text" id="txtName" name="txtName" value="<?php echo $name?>">
+         </div>
+        <div class="acinf">
+            <label style="float: left;" for=""class="lblTitle"> Mail</label>
+            <input type="text" id="txtMail" name="txtMail" value="<?php echo $mail?>">
         </div>
-      </div>
-      <form class="login-form" name="register-form" method="POST">
-        <input type="text" name="txtUsername" id="txtUsername" placeholder="Username"/>
-        <input type="password" name="txtPass1" id="txtPass1" placeholder="Password"/>
-        <input type="password" name="txtPass2" id="txtPass2" placeholder="Confirm password"/>
-        <input type="text" name="txtName" id="txtName" placeholder="Full name"/>
-        <input type="text" name="txtEmail" id="txtEmail" placeholder="Email"/>
-        <input type="text" name="txtPhone" id="txtPhone" placeholder="Phone number"/>
-        <input type="text" name="txtAddress" id="txtAddress" placeholder="Address"/>
-        <div class="dropdown"><?php bind_Department($conn) ?></div>
-        <button type="submit" name="btnRegister" id="btnRegister" value="Register">REGISTER</button>
-
-      </form>
-    </div>
-  </div>
-</body>
-</html>
+        <div class="acinf">
+            <label style="float: left;" for=""class="lblTitle"> Phone</label>
+            <input type="text" name="txtPhone" id="txtPhone"  value="<?php echo $tel?>">
+        </div>
+        <div class="acinf">
+            <label style="float: left;" for=""class="lblTitle"> Address</label>
+            <input type="text" name="txtAdd" id="txtAdd"  value="<?php echo $address?>">
+        </div>
+        
+        <input type="submit" class="btnUpd" name="btnUpdate" id="btnUpdate" value="UPDATE">
+        <a href="?page=home" class="btn_back"><span>Back &#10148; </span></a>
+        </div>
+    </form>
+    
+</div>

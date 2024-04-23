@@ -31,3 +31,6 @@ p{
     background-color: #ffffff;
     border: 1px solid;
 }
+thead th {
+    text-align: center; /* căn giữa nội dung của các thẻ th */
+  }

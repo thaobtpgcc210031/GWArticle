@@ -1,3 +1,98 @@
+<style>
+/* Reset some default styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container1 {
+    margin: 20px auto;
+    width: 50%;
+}
+
+p {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+form {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.row {
+    margin-bottom: 20px;
+}
+
+.col-25 {
+    float: left;
+    width: 25%;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.btn_back {
+    background-color: #f44336;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn_back:hover {
+    background-color: #d32f2f;
+}
+
+</style>
 <link rel="stylesheet" href="./Css/addform.css">
 
 <?php
@@ -64,7 +159,7 @@ if(isset($_POST['btnAddAccount'])){
             mysqli_query($conn, "
                                 INSERT INTO users(`Username`, `Password`, `Email`, `Depart`,`Role`, `FullName`, `Address`, `Phone`) 
                                 VALUES ('$us','$pass' ,'$email','$department','$role','$fullname','$address','$tele')") or die(mysqli_error($conn));
-                                echo "You have registered successfully";
+                                echo "You have created account successfully";
         }else{
 		      echo "Username or email already exists";
         }
@@ -145,7 +240,7 @@ if(isset($_POST['btnAddAccount'])){
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="lname">Department</label>
+      <label for="lname">Role</label>
     </div>
     <div class="col-75">
       <div class="dropdown"><?php bind_Role($conn) ?></div>

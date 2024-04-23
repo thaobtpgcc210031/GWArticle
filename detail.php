@@ -115,13 +115,12 @@
 include_once("connection.php");
 if(isset($_GET["id"])){
     $id = $_GET["id"];
-    $result = mysqli_query($conn, "SELECT magazine.*, contributions.ImgCv, contributions.title, contributions.ImgSample,contributions.ContentP  
-    FROM magazine LEFT JOIN contributions ON magazine.ContributionID = contributions.ContributionID WHERE MagazineID = '$id'");
+    $result = mysqli_query($conn, "SELECT * From contributions WHERE ContributionID = '$id'");
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-    $price = $row['MagazineID'];
-    $name = $row['ContentM'];
+    // $price = $row['MagazineID'];
+    $name = $row['Title'];
     $image = $row['ImgCv'];
-    $sampleimg = $row['ImgSample'];
+   
     $content = $row['ContentP'];
     //echo $_SESSION['us'];
 }
@@ -147,30 +146,18 @@ if(isset($_GET["id"])){
     <div class="container">
         <div class="article">
             <div class="left-panel">
-                <img src="./Img/<?php echo $image ?>" alt="Cover page">
+               <?php
+                echo '<img style="width:100px; height:100px" src="./Img/' . $row["ImgCv"] . '" alt="Cover page">';
+?>
             </div>
             <div class="middle-panel">
                 <h1><?php echo $name;?></h1>
                 <p><?php echo $content ?></p>
                
             </div>
-            <div class="right-panel">
-                <div class="pdf-link">
-                    <a href="download.php?file=example.pdf" target="_blank">Download PDF</a>
-                </div>
-            </div>
+            
         </div>
-        <div class="article-image">
-            <img src="./Img/<?php echo $sampleimg ?>" alt="Sample">
-        </div>
+        
     </div>
-    <section>
-        <h2>Feedback</h2>
-        <p>If you have any questions, suggestions, or feedback for this article, please type here.</p>
-        <form action="#" method="post">
-            <label for="message" style="font-weight:bold; font-size: 20px;">Message:</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-            <button type="submit">Send</button>
-        </form>
-    </section>
+    
 </main>

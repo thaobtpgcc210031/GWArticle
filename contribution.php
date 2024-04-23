@@ -23,7 +23,7 @@ if (isset($_GET["function"]) == "del") {
 <div class="container1">
     <p>ARTICLE MANAGERMENT</p>
     <div>
-        <a href="?page=add_contribution"><button class="button" style="vertical-align:middle"><span>ADD </span></button></a>
+        <a href="?page=add_contri"><button class="button" style="vertical-align:middle"><span>ADD </span></button></a>
         <a href="?page=back"><button class="button" style="vertical-align:middle"><span>BACK &#10148; </span></button></a>
 
     </div>
@@ -32,13 +32,13 @@ if (isset($_GET["function"]) == "del") {
             <tr>
                 <th>Student ID</th>
                 <th>Title</th>
-                <th>Public Date</th>
+               
                 <th>ContentP</th>
                 <th>SubmissionDate</th>
                 <th>Status</th>
                 <th>FileP</th>
                 <th>Image CV</th>
-                <th>Image Sample</th>
+        >
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -52,16 +52,15 @@ if (isset($_GET["function"]) == "del") {
             ?>
                 <tr>
 
-                    <td style="text-align: center;"><?php echo $row["StudentID"]; ?></td>
+                    <td style="text-align: center;"><?php echo $row["UserID"]; ?></td>
                     <td style="text-align: center;"><?php echo $row["Title"]; ?></td>
                     <td style="text-align: center;"><?php echo $row["ContentP"]; ?></td>
                     <td style="text-align: center;"><?php echo $row["SubmissionDate"]; ?></td>
                     <td style="text-align: center;"><?php echo $row["Status"]; ?></td>
                     <td style="text-align: center;"><?php echo $row["FileP"]; ?></td>
                     <td style="text-align: center;"><?php echo $row["ImgCv"]; ?></td>
-                    <td style="text-align: center;"><?php echo $row["ImgSample"]; ?></td>
                     <td style='text-align:center'>
-                        <a href="?page=update_contribution&&id=<?php echo $row["ContributionID"]; ?>" style="color: green; text-decoration: none;">
+                        <a href="?page=update_contri&&id=<?php echo $row["ContributionID"]; ?>" style="color: green; text-decoration: none;">
                             &#9998;</a>
                     </td>
                     <td style='text-align:center'>

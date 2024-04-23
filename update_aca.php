@@ -1,5 +1,5 @@
 <style>
-/* Reset some default styles */
+    /* Reset some default styles */
 body, html {
     margin: 0;
     padding: 0;
@@ -81,67 +81,69 @@ input[type=submit]:hover {
     background-color: #d32f2f;
 }
 
-
-
 </style>
-
-
 <link rel="stylesheet" href="./Css/addform.css">
 
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-ob_start(); // Bắt đầu output buffering
-
 include_once("connection.php");
+
 
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
-    $sqlstring = "SELECT * FROM department WHERE departmentID='$id'";
+    $sqlstring = "Select * From academicyear where YearID='$id'";
     $result = mysqli_query($conn, $sqlstring);
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    $aca = $row["AcaYear"];  
+    $clo = $row["closureDate"];
+    $fclo = $row['fclosureDate'];
+    // $closure = $row["ClosureDate"];
+    // $finalclo = $row["FinalClosureDate"];
 
-    $maga = $row["departmentID"];
-    $contri = $row["departmentName"];
-    $aca = $row["DeDes"];
 ?>
 
 
     <br>
     <div class="container1">
         <div>
-            <p style="margin-bottom: 10px; margin-left: 20px;">UDATE FACULTY</p>
+            <p style="margin-bottom: 10px; margin-left: 20px;">UDATE ACADEMIC YEAR</p>
             <div>
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-25">
-                            <label for="">Department ID</label>
+                            <label for="">ID</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" id="txtID" name="txtID" readonly value='<?php echo $maga; ?>' placeholder="ID of ...">
+                            <input type="text" id="txtID" name="txtID" readonly value='<?php echo $id; ?>' placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-25">
-                            <label for="">Department Name</label>
+                            <label for="">ACADEMIC YEAR</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" id="txtCon" name="txtCon" value='<?php echo $contri; ?>' placeholder="Name of ...">
+                            <input type="text" id="txtaca" name="txtaca" value='<?php echo $aca; ?>' placeholder="Name of ...">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-25">
-                            <label for="">Description</label>
+                            <label for="">CLOSURE DATE</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" id="txtAca" name="txtAca" value='<?php echo $aca; ?>' placeholder="">
+                            <input type="text" id="txtclo" name="txtclo" value='<?php echo $clo; ?>' placeholder="Name of ...">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="">FINAL CLOSURE DATE</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="txtfclo" name="txtfclo" value='<?php echo $fclo; ?>' placeholder="Name of ...">
                         </div>
                     </div>
                     <br>
                     <div class="row">
                         <input type="submit" name="btnUpdate" id="btnUpdate" value="Update">
-                        <a href="?page=faculty" class="btn_back"><span>Back &#10148; </span></a>
+                        <a href="?page=acayear" class="btn_back"><span>Back &#10148; </span></a>
                     </div>
 
                 </form>
@@ -149,24 +151,39 @@ if (isset($_GET["id"])) {
         </div>
     </div>
 
-
     <?php
     if (isset($_POST["btnUpdate"])) {
-        $contri = $_POST["txtCon"];
-        $aca = $_POST["txtAca"];
+        $aca = $_POST["txtaca"];
+        $clo = $_POST["txtclo"];
+        $fclo = $_POST["txtfclo"];
+        // $publ = $_POST["txtPub"];
+        // $conte = $_POST['txtCont'];
+        // $closure = $_POST["txtClo"];
+// $finalclo = $_POST["txtFClo"];
+
+
+        $err = "";
         if (trim($id) == "") {
-            echo "Nhập ID";
+            $err .= "<li>Enter ID </li>";
+
         } else {
-            $sqlstring = "UPDATE department SET departmentName='$contri', DeDes='$aca' WHERE departmentID='$id'";
-            if (mysqli_query($conn, $sqlstring)) {
-                echo '<meta http-equiv="refresh" content="0;URL=index.php?page=faculty"/>';
-                echo "Update Successfully.";               
-                exit();
+            $sq = "Select * from academicyear where YearID = '$id'";
+            $result = mysqli_query($conn, $sq);
+            if (mysqli_num_rows($result) == 1) {
+                $sqlstring = "UPDATE academicyear set AcaYear='$aca',closureDate='$clo',fclosureDate='$fclo'
+                     WHERE YearID='$id'";
+                mysqli_query($conn, $sqlstring);
+                echo '<meta http-equiv="refresh" content="0;URL=index.php?page=acayear"/>';
             } else {
-                echo "Lỗi khi cập nhật bản ghi: " . mysqli_error($conn);
+                echo "<li>ERROR</li>";
             }
         }
     }
+    // }
+    ?>
+
+<?php
+} else {
+    echo '<meta http-equiv="refresh" content="0;URL=index.php?page=acayear"/>';
 }
-ob_end_flush(); // Flush và tắt output buffering
 ?>

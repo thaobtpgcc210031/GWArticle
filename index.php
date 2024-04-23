@@ -14,6 +14,7 @@
   <title>GW Magazine - Welcome</title>
 </head>
 <style>
+  
   .grid-container {
     display: grid;
     grid-template-columns: 100px 268px;
@@ -112,27 +113,22 @@ include_once("connection.php");
           if (isset($_SESSION['role']) && $_SESSION['role'] == 1) {
           ?>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-weight: bold;">
-                ARTICLE
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#" style="font-weight: bold;">School</a></li>
-                <li><a class="dropdown-item" href="#" style="font-weight: bold;">Social</a></li>
-                <li><a class="dropdown-item" href="#" style="font-weight: bold;">All..</a></li>
-              </ul>
+              
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-weight: bold;">
                 CONTRIBUTIONS
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="?page=addcontri" style="font-weight: bold;">Submit</a></li>
-                <li><a class="dropdown-item" href="#" style="font-weight: bold;">Your Submit</a></li>
+                <li><a class="dropdown-item" href="?page=add_contri" style="font-weight: bold;">Submit</a></li>
+                <li><a class="dropdown-item" href="?page=studentsubmit" style="font-weight: bold;">Your Submit</a></li>
+
               </ul>
             </li>
           <?php
 
-          } elseif (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
+          }
+           elseif (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
           ?>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-weight: bold;">
@@ -140,8 +136,6 @@ include_once("connection.php");
               </a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="?page=submit" style="font-weight: bold;">View Contribution</a></li>
-                <!-- <li><a class="dropdown-item" href="?page=polo" style="font-weight: bold;">Social</a></li>
-                <li><a class="dropdown-item" href="?page=show" style="font-weight: bold;">All..</a></li> -->
                 <li><a class="dropdown-item" href="?page=manage_feedback" style="font-weight: bold;">Manage Feedback</a></li>
               </ul>
              
@@ -154,16 +148,12 @@ include_once("connection.php");
                   MANAGERMENT
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="?page=article" style="font-weight: bold;">Article</a></li>
                   <li><a class="dropdown-item" href="?page=manage_account" style="font-weight: bold;">Account</a></li>
 
                   <li><a class="dropdown-item" href="?page=faculty" style="font-weight: bold;">Faculty</a></li>
 
-                  <li><a class="dropdown-item" href="?page=feedback_manage" style="font-weight: bold;">Manage Feedback</a></li>
 
-
-
-                  <li><a class="dropdown-item" href="?page=show" style="font-weight: bold;">All..</a></li>
+                  <li><a class="dropdown-item" href="?page=acayear" style="font-weight: bold;">Academic Year</a></li>
   
                 </ul>
               </li>
@@ -176,12 +166,37 @@ include_once("connection.php");
                   MANAGE
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="?page=tshirt" style="font-weight: bold;">Contributions</a></li>
-                  <li><a class="dropdown-item" href="?page=show" style="font-weight: bold;">Statistical</a></li> 
+                <li><a class="dropdown-item" href="?page=magaCon" style="font-weight: bold;">Contributions</a></li>
+                  <li><a class="dropdown-item" href="?page=sta_con" style="font-weight: bold;">Statistic Contributions</a></li> 
+                  <li><a class="dropdown-item" href="?page=sta_tor" style="font-weight: bold;">Statistic Contributors</a></li> 
+                  <li><a class="dropdown-item" href="?page=sta_per" style="font-weight: bold;">Statistic Percentage</a></li> 
+                  <li><a class="dropdown-item" href="?page=sta_sta" style="font-weight: bold;">Statistic Status</a></li> 
+                  <li><a class="dropdown-item" href="?page=sta_userrole" style="font-weight: bold;">Statistic User Role</a></li> 
+                  <li><a class="dropdown-item" href="?page=statistic_Comment" style="font-weight: bold;">Statistic Comment</a></li> 
+                  <li><a class="dropdown-item" href="?page=viewApp" style="font-weight: bold;">Annual </a></li>
                 </ul>
               </li>
             <?php
             }
+            elseif (isset($_SESSION['role']) && $_SESSION['role'] == 2) {
+              ?>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-weight: bold;">
+                  STATISTICAL ANALYSIS
+                  </a>
+                  <ul class="dropdown-menu">
+        
+                  <li><a class="dropdown-item" href="?page=sta_con" style="font-weight: bold;">Statistic Contributions</a></li> 
+                  <li><a class="dropdown-item" href="?page=sta_tor" style="font-weight: bold;">Statistic Contributors</a></li> 
+                  <li><a class="dropdown-item" href="?page=sta_per" style="font-weight: bold;">Statistic Percentage</a></li> 
+                  <li><a class="dropdown-item" href="?page=sta_sta" style="font-weight: bold;">Statistic Status</a></li> 
+                  <li><a class="dropdown-item" href="?page=sta_userrole" style="font-weight: bold;">Statistic User Role</a></li> 
+                  <li><a class="dropdown-item" href="?page=statistic_Comment" style="font-weight: bold;">Statistic Comment</a></li>  
+                 
+                </ul>
+                </li>
+              <?php
+              }
            else {
           ?>
             <li class="nav-item dropdown">
@@ -279,9 +294,7 @@ include_once("connection.php");
     if ($page == "update_feedback") {
       include_once("update_feedback.php");
     }
-    if ($page == "add_article") {
-      include_once("add_article.php");
-    }
+  
     if ($page == "add_account") {
       include_once("add_account.php");
     }
@@ -290,6 +303,9 @@ include_once("connection.php");
     }
     if ($page == "back") {
       include_once("content.php");
+    }
+    if ($page == "downloadZIP") {
+      include_once("downloadZIP.php");
     }
     if ($page == "home") {
       include_once("content.php");
@@ -321,7 +337,7 @@ include_once("connection.php");
     if ($page == "manage_account") {
       include_once("manage_account.php");
     }
-    if ($page == "addcontri") {
+    if ($page == "add_contri") {
       include_once("add_contribution.php");
     }
     if ($page == "update_account") {
@@ -344,6 +360,60 @@ include_once("connection.php");
     }
     if($page == "manage_feedback"){
       include_once("manage_feedback.php");
+    }
+   
+    if($page == "acayear"){
+      include_once("AcaYear.php");
+    }
+    if($page == "addacayear"){
+      include_once("add_aca.php");
+    }
+    if($page == "updateacayear"){
+      include_once("update_aca.php");
+    }
+    if($page == "addclo"){
+      include_once("add_closure.php");
+    }
+    if($page == "update_contri"){
+      include_once("update_contribution.php");
+    }
+    if($page == "updateclo"){
+      include_once("update_clo.php");
+    }
+    if($page == "studentsubmit"){
+      include_once("mysubmit.php");
+    }
+    if($page == "viewApp"){
+      include_once("View_approve.php");
+    }
+    if($page == "magaCon"){
+      include_once("Manager_contri.php");
+    }
+    if($page == "detailM"){
+      include_once("More_Annual.php");
+    }
+    if($page == "sta_sta"){
+      include_once("statistic_status.php");
+    }
+    if($page == "sta_con"){
+      include_once("statistic_Contributions.php");
+    }
+    if($page == "sta_tor"){
+      include_once("statistic_Contributors.php");
+    }
+
+    if($page == "sta_per"){
+      include_once("statistic_Percentage.php");
+    }
+    if($page == "sta_userrole"){
+      include_once("statistic_userRole.php");
+    }
+
+    if($page == "Number_Contributors"){
+      include_once("statistic_Contributors.php");
+    }
+    if($page == "statistic_Comment"){
+      include_once("statistic_Comment.php");
     }
   } else {
     include_once("content.php");
@@ -408,7 +478,7 @@ include_once("connection.php");
       </div>
     </section>
     <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
-      © 2022 N-Shirt fashion store
+      © 2024 Code Stream Team
     </div>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>

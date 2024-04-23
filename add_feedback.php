@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="./Css/addform.css">
 <?php
 // Bao gồm file kết nối
 include_once("connection.php");
@@ -6,7 +7,7 @@ function bind_Contribution($conn)
   $sqlstring = "SELECT ContributionID, Title FROM contributions";
   $result = mysqli_query($conn, $sqlstring);
   echo "<select name='contributionID'>
-            <option value ='0'>choose contributions</option>";
+            <option value ='0'>Choose contributions</option>";
   while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
     echo "<option value='" . $row['ContributionID'] . "'>" . $row['Title'] . "</option>";
   }
@@ -15,36 +16,23 @@ function bind_Contribution($conn)
 
 function bind_User($conn)
 {
-  $sqlstring = "SELECT UserID FROM users";
+  $sqlstring = "SELECT UserID, Username, fullName FROM users";
   $result = mysqli_query($conn, $sqlstring);
   echo "<select name='userID'>
-            <option value ='0'>choose user</option>";
+            <option value ='0'>Choose user (UserName-FullName)</option>";
   while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-    echo "<option value='" . $row['UserID'] . "'>" . $row['UserID'] . "</option>";
+    echo "<option value='" . $row['UserID'] . "'>". $row['Username']. "-" . $row['fullName'] . "</option>";
   }
   echo "</select>";
 }
 
-
-
-// Xử lý dữ liệu khi người dùng gửi form
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Kiểm tra và lấy dữ liệu từ form
-  $contributionID = $_POST["contributionID"];
-  $comment = $_POST["comment"];
-  $userID = $_POST["userID"];
-
-  // Chuẩn bị câu lệnh SQL để chèn dữ liệu vào bảng comments
-  $sql = "INSERT INTO comments (ContributionID, Comment, UserID) VALUES ('$contributionID', '$comment', '$userID')";
-
-  // Thực thi câu lệnh SQL
-  if (mysqli_query($conn, $sql)) {
-    // Chuyển hướng người dùng sau khi thêm thành công
-    header("Location: manage_feedback.php");
-    exit();
-  } else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-  }
+if(isset($_POST['btnAddfback'])){	
+	$contri = $_POST['contributionID'];
+	$user = $_POST['userID'];
+  $cmt = $_POST['comment'];
+      mysqli_query($conn, "INSERT INTO comments(`ContributionID`, `Comment`, `CommentDate`, `UserID`) 
+                          VALUES ('$contri','$cmt' , NOW(),'$user')") or die(mysqli_error($conn));
+                          echo "Add feedback successfully";
 }
 ?>
 
@@ -58,28 +46,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
+  <div class="container1">
+    <div>
   <h2>Add Feedback</h2>
 
-  <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+  <form method="POST" enctype="multipart/form-data">
+
     <div class="row">
-      <label for="" class="col-25">Contribution </label>
-      <div class="col-75">
-        <?php bind_Contribution($conn); ?>
-      </div>
+    <div class="col-25">
+      <label for="fname">Contribution</label>
     </div>
-
-    <label for="comment">Comment:</label><br>
+    <div class="col-75">
+      <?php bind_Contribution($conn); ?>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="fname">Comment</label>
+    </div>
+    <div class="col-75">
     <textarea id="comment" name="comment" rows="4" cols="50" required></textarea><br><br>
+    </div>
+  </div>
 
     <div class="row">
+    <div class="col-25">
       <label for="" class="col-25">User ID </label>
+    </div>
       <div class="col-75">
         <?php bind_User($conn); ?>
       </div>
     </div>
 
-    <input type="submit" value="Submit">
+    <br>
+  <div class="row">
+    <input type="submit" name="btnAddfback" id="btnAddfback" value="ADD">
+    <a href="?page=manage_feedback" class="btn_back"><span>Back &#10148; </span></a>
+  </div>
   </form>
+  </div>
+</div>
+
 </body>
 
 </html>

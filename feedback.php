@@ -1,5 +1,10 @@
 <link rel="stylesheet" href="./Css/cate.css"/>
 	<meta charset="utf-8" />
+    <style>
+  thead th {
+    text-align: center; /* căn giữa nội dung của các thẻ th */
+  }
+</style>
     <script langguae="javascript">
         function deleteConfirm(){
             if(confirm("Are you sure to delete!")){

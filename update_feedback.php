@@ -2,13 +2,7 @@
 
 <?php
     include_once("connection.php");
-	if(isset($_GET["id"])){
-		$id = $_GET["id"];
-		$result = mysqli_query($conn, "SELECT * FROM category WHERE Cat_ID = '$id'");
-		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-		$cat_id = $row['Cat_ID'];
-		$cat_name = $row['Cat_Name'];
-		$cat_des = $row['Cat_Des'];
+
 	?>
 
 
@@ -63,11 +57,7 @@
  
   </form>
 </div>
-<?php
-	}else{
-		echo '<meta http-equiv"refresh" content="0,URL=Category_Management.php"/>';
-	}
-	?>
+
 <?php
 $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
