@@ -173,7 +173,7 @@ include_once("connection.php");
                   <li><a class="dropdown-item" href="?page=sta_sta" style="font-weight: bold;">Statistic Status</a></li> 
                   <li><a class="dropdown-item" href="?page=sta_userrole" style="font-weight: bold;">Statistic User Role</a></li> 
                   <li><a class="dropdown-item" href="?page=statistic_Comment" style="font-weight: bold;">Statistic Comment</a></li> 
-                  <li><a class="dropdown-item" href="?page=viewApp" style="font-weight: bold;">Annual </a></li>
+                  <li><a class="dropdown-item" githref="?page=viewApp" style="font-weight: bold;">Annual </a></li>
                 </ul>
               </li>
             <?php
